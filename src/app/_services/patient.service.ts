@@ -24,9 +24,15 @@ export class PatientService {
         .map(response => <PatientDetailed>response.json())
         .catch(this.handleError);
     }
-    getDepartments(): Observable<SharedDepartmentsList[]>{
+    getDepartments(){
         return this.authHttp.get(this.baseUrl + 'departments')
-        .map((response: Response) => <SharedDepartmentsList[]>response.json())
+        .map((response: any) => response.json())
+        .catch(this.handleError);
+    }
+
+    getPositions(){
+        return this.authHttp.get(this.baseUrl + 'positions')
+        .map((response: any) => response.json())
         .catch(this.handleError);
     }
 

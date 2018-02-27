@@ -8,6 +8,7 @@ import { Pagination, PaginatedResult } from '../../_models/pagination';
 import { SharedStaffsList } from '../../_models/SharedStaffsList';
 import { SharedDepartmentsList } from '../../_models/SharedDepartmentsList';
 import { forEach } from '@angular/router/src/utils/collection';
+import { SharedPositionsList } from '../../_models/SharedPositionsList';
 
 @Component({
   selector: 'app-sharedStaffsList',
@@ -18,6 +19,7 @@ export class SharedStaffsListComponent implements OnInit {
   sharedStaffsList: SharedStaffsList[];
   pagination: Pagination;
   sharedDepartmentsList: SharedDepartmentsList[];
+  sharedPositionsList: SharedPositionsList[];
 
   constructor( 
     private patientService: PatientService,
@@ -31,12 +33,21 @@ export class SharedStaffsListComponent implements OnInit {
       });
     
     this.loadDepartments();
-    console.log(this.sharedDepartmentsList);
+    this.loadPositions();
   }
 
   loadDepartments(){
     this.patientService.getDepartments()
-    .subscribe(data => this.sharedDepartmentsList = data)  
+    .subscribe((data: SharedDepartmentsList[]) => {      
+      this.sharedDepartmentsList = data;
+    })  
+  }
+
+  loadPositions(){
+    this.patientService.getPositions()
+    .subscribe((data: SharedPositionsList[]) => {      
+      this.sharedPositionsList = data;
+    })  
   }
 
   loadStaffs() {

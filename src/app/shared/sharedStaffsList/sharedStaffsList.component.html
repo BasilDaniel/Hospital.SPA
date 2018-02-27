@@ -1,23 +1,32 @@
-<div class="container">
+<div class="container filter-conteiner">
 
     <div class="row">
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadStaffs()" novalidate>
         <div class="form-group">
           <label for="name">ФИО</label>
-          <input type="string" class="form-control" style="width: 200px" id="name" name="name">
+          <input type="string" class="form-control" style="width: 270px" id="name" name="name">
         </div>
   
         <div class="form-group">
           <label for="departments">Отделения: </label>
-          <select class="form-control" style="width: 130px" id="departments" name="departments">
-            <option *ngFor="let item of sharedDepartmentsList" [value]="item.name">
-              {{item.display}}
+          <select class="form-control" style="width: 170px" id="departments" name="departments">
+            <option *ngFor="let item of sharedDepartmentsList" [value]="item?.name">
+              {{item?.name}}
             </option>
           </select>
         </div>
-        <!-- <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
-        <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Reset Filter</button>
-        <div class="pull-right">
+
+        <div class="form-group">
+          <label for="positions">Врачи: </label>
+          <select class="form-control" style="width: 170px" id="positions" name="positions">
+            <option *ngFor="let item of sharedPositionsList" [value]="item?.name">
+              {{item?.name}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left:10px">Найти</button>
+        <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
+        <!-- <div class="pull-right">
             <label style="margin-right: 10px">Order By: </label>
             <div class="btn-group">
               <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="lastActive" (click)="loadUsers()">Last Active</button>
