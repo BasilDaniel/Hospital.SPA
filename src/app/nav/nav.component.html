@@ -1,0 +1,126 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/home']">Больница имени А.П.Ершова</a>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <!-- StaffNavbar links -->
+      <ul class="nav navbar-nav" *ngIf="LoggedIn('admin')">
+        <li class="dropdown" dropdown>
+            <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудники<span class="caret"></span></a>
+          <ul class="dropdown-menu" *dropdownMenu>
+            <li routerLinkActive="active"><a [routerLink]="['/admin/staffs']">Врачи</a></li>
+            <li role="separator" class="divider"></li>
+            <li routerLinkActive="active"><a [routerLink]="['/admin/admins']">Администраторы </a></li>
+          </ul>
+        </li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/positions']">Должности</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/departments']">Отделения</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/diseases']">Заболевания</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/patients']">Пациенты</a></li>
+      </ul>
+
+      <!-- AdminNavbar links -->
+      <ul class="nav navbar-nav" *ngIf="LoggedIn('staff')">
+        <li routerLinkActive="active"><a [routerLink]="['/staff/staffs']">Сотрудники</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/staff/disease']">Заболевания</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/staff/patients']">Пациенты</a></li>
+      </ul>
+
+      <!-- PatientNavbar links -->
+      <ul class="nav navbar-nav" *ngIf="LoggedIn('patient')">
+          <li routerLinkActive="active"><a [routerLink]="['/patient/staffs']">Отделения и врачи</a></li>
+        </ul>
+
+      <!-- StaffAdminLogin dropdown menu -->
+      <ul *ngIf="!ToggleLoginForm('nobody')" class="nav navbar-nav">
+        <li class="dropdown" dropdown>
+            <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудникам<span class="caret"></span></a>
+          <ul class="dropdown-menu" *dropdownMenu>
+            <li routerLinkActive="active"><a (click)="ActivateLoginForm('staff')">Для врачей</a></li>
+            <li role="separator" class="divider"></li>
+            <li routerLinkActive="active"><a (click)="ActivateLoginForm('admin')">Для регистратуры </a></li>
+          </ul>
+        </li>
+        <li routerLinkActive="active"><a (click)="ActivateLoginForm('patient')">Пациентам</a></li>
+      </ul>
+
+      <!-- Patientlogin form  -->
+      <form *ngIf="ToggleLoginForm('patient')" #loginForm="ngForm"class="navbar-form navbar-right" (ngSubmit)="Login('patient')">
+          <div class="form-group">
+            <input type="text" placeholder="Имя" class="form-control" required name="name" [(ngModel)]="model.name">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
+          </div>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти patient</button>
+        </form>
+
+      <!-- StaffLogin form -->
+      <form *ngIf="ToggleLoginForm('staff')" #loginForm="ngForm"class="navbar-form navbar-right" (ngSubmit)="Login('staff')">
+        <div class="form-group">
+          <input type="text" placeholder="Имя" class="form-control" required name="name" [(ngModel)]="model.name">
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти staff</button>
+      </form>
+
+      <!-- AdminLogin form -->
+      <form *ngIf="ToggleLoginForm('admin')" #loginForm="ngForm"class="navbar-form navbar-right" (ngSubmit)="Login('admin')">
+          <div class="form-group">
+            <input type="text" placeholder="Имя" class="form-control" required name="name" [(ngModel)]="model.name">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
+          </div>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти admin</button>
+        </form>
+
+      <!-- Staff dropdown menu -->
+      <ul *ngIf="LoggedIn('staff')" class="nav navbar-nav navbar-right">
+          <li class="dropdown" dropdown>
+            <a (click)="false" class="dropdown-toggle" dropdownToggle>Здравствуйте {{authService.decodedToken?.unique_name | titlecase}}<span class="caret"></span></a>
+            <ul class="dropdown-menu" *dropdownMenu>
+              <li><a [routerLink]="['/staff/staff', authService?.userId]"><i class="fa fa-user fa-margin"></i>Профиль</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a (click)="Logout('staff')"><i class="fa fa-sign-out fa-margin"></i>Выход</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Patient dropdown menu -->
+        <ul *ngIf="LoggedIn('patient')" class="nav navbar-nav navbar-right">
+            <li class="dropdown" dropdown>
+              <a (click)="false" class="dropdown-toggle" dropdownToggle>Здравствуйте {{authService.decodedToken?.unique_name | titlecase}}<span class="caret"></span></a>
+              <ul class="dropdown-menu" *dropdownMenu>
+                <li><a [routerLink]="['/patient/patient', authService?.userId]"><i class="fa fa-user fa-margin"></i>Профиль</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a (click)="Logout('patient')"><i class="fa fa-sign-out fa-margin"></i>Выход</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Admin dropdown menu -->
+      <ul *ngIf="LoggedIn('admin')" class="nav navbar-nav navbar-right">
+        <li class="dropdown" dropdown>
+          <a (click)="false" class="dropdown-toggle" dropdownToggle>Здравствуйте {{authService.decodedToken?.unique_name | titlecase}}<span class="caret"></span></a>
+          <ul class="dropdown-menu" *dropdownMenu>
+            <li><a [routerLink]="['/admin/admin', authService?.userId]"><i class="fa fa-user fa-margin"></i>Профиль</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a (click)="Logout('staff')"><i class="fa fa-sign-out fa-margin"></i>Выход</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div><!--/.navbar-collapse -->
+  </div>
+</nav>

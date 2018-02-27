@@ -1,0 +1,15 @@
+<div *ngIf="!registerMode" style="text-align:center">
+    <h1>Войдите в систему</h1>
+    <p class="lead">Если у Вас нет аккаунта - зарегистрируйтесь</p>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg" (click)="registerToggle()">Регистрация</button>
+      <!-- <button class="btn btn-info btn-lg">Узнать больше</button> -->
+    </div>
+  </div>
+  
+  <div *ngIf="registerMode" class="container">
+    <div class="col-md-4 col-md-offset-4">
+      <app-patientRegister (cancelRegister)="cancelRegisterMode($event)"></app-patientRegister>
+    </div>
+  </div>
+  

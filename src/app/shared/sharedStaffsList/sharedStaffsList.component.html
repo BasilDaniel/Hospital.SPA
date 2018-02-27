@@ -1,0 +1,62 @@
+<div class="container">
+
+    <div class="row">
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadStaffs()" novalidate>
+        <div class="form-group">
+          <label for="name">ФИО</label>
+          <input type="string" class="form-control" style="width: 200px" id="name" name="name">
+        </div>
+  
+        <div class="form-group">
+          <label for="departments">Отделения: </label>
+          <select class="form-control" style="width: 130px" id="departments" name="departments">
+            <option *ngFor="let item of sharedDepartmentsList" [value]="item.name">
+              {{item.display}}
+            </option>
+          </select>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
+        <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Reset Filter</button>
+        <div class="pull-right">
+            <label style="margin-right: 10px">Order By: </label>
+            <div class="btn-group">
+              <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="lastActive" (click)="loadUsers()">Last Active</button>
+              <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="created" (click)="loadUsers()">Newest Members</button>
+            </div>
+        </div> -->
+      </form>
+    </div>
+    <br>  
+  </div>
+  
+
+<h4 class="text-center">Врачи</h4>
+  <table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Отделение</th>
+            <th>Врач</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of sharedStaffsList">
+            <td>{{item.department.name}}</td>
+            <td>{{item.position.name}}</td>
+            <td>{{item.familyName}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.middleName}}</td>
+        </tr>        
+    </tbody>
+  </table>
+
+    <div class="text-center">
+        <pagination [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage" 
+        (pageChanged)="pageChanged($event)"
+        [(ngModel)]="pagination.currentPage" class="pagination-sm"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+    </div>

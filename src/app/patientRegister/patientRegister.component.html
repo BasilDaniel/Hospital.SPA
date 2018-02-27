@@ -1,0 +1,26 @@
+<form #registerForm="ngForm" (ngSubmit)="PatientRegister()">
+    <h2 class="text-center text-primary">Введите свои данные</h2>
+  
+    <hr>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Имя" required name="name" [(ngModel)]="patientModel.name">
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Отчество" required name="middleName" [(ngModel)]="patientModel.middleName">
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Фамилия" required name="familyName" [(ngModel)]="patientModel.familyName">
+    </div>
+  
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Пароль" required name="password" [(ngModel)]="patientModel.password">
+    </div>
+  
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">Зарегистрировать</button>
+      <button class="btn btn-default" type="button" (click)="cancel()">Отмена</button>
+    </div>
+  </form>

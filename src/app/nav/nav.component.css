@@ -1,0 +1,6 @@
+.dropdown-menu li, .dropdown-toggle, .navbar-right li, nav li {
+    cursor: pointer;
+}
+.fa-margin{
+    margin-right: 10px;
+}

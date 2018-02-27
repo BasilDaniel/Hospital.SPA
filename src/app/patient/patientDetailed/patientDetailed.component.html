@@ -1,0 +1,59 @@
+<h4 class="text-center">Личные данные</h4>
+<table class="table table-hover table-bordered table-container table-aligment">
+  <thead>
+      <tr>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Дата рождения</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{patientDetailed.familyName}}</td>
+          <td>{{patientDetailed.name}}</td>
+          <td>{{patientDetailed.middleName}}</td>
+          <td>{{patientDetailed.birthdate}}</td>
+      </tr>        
+  </tbody>
+</table>
+<h4 class="text-center">Заболевания</h4>
+<table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Заболевание</th>
+            <th>Поставлен диагноз</th>
+            <th>Выздоровление</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of patientDetailed.patientDiseases">
+            <td>{{item.disease.name}}</td>
+            <td>{{item.diagnosed}}</td>
+            <td>{{item.cured}}</td>
+        </tr>        
+    </tbody>
+  </table>
+  <h4 class="text-center">Посещения</h4>
+  <table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Дата и время</th>
+            <th>Отделение</th>
+            <th>Врач</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of patientDetailed.appointments">
+            <td>{{item.dateTime}}</td>
+            <td>{{item.staff.department.name}}</td>
+            <td>{{item.staff.position.name}}</td>
+            <td>{{item.staff.familyName}}</td>
+            <td>{{item.staff.name}}</td>
+            <td>{{item.staff.middleName}}</td>
+        </tr>        
+    </tbody>
+  </table>
