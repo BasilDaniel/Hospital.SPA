@@ -37,6 +37,7 @@ import { SharedPositionDetailedComponent } from './shared/sharedPositionDetailed
 import { PatientDetailedResolver } from './_resolvers/patientDetailed.resolver';
 import { SharedStaffsListResolver } from './_resolvers/sharedStaffsList.resolver';
 import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
+import { SharedService } from './_services/shared.service';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
     AdminAuthGuard,
     PatientService,
     StaffService,
+    SharedService,
     PatientDetailedResolver,
     SharedStaffsListResolver
   ],
