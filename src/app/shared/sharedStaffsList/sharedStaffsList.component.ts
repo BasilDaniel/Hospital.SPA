@@ -52,7 +52,7 @@ export class SharedStaffsListComponent implements OnInit {
   }
 
   loadStaffs() {
-    this.patientService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.sharedService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<SharedStaffsList[]>) => {
         this.sharedStaffsList = res.result;
         this.pagination = res.pagination;

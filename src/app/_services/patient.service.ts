@@ -24,39 +24,28 @@ export class PatientService {
         .map(response => <PatientDetailed>response.json())
         .catch(this.handleError);
     }
-    getDepartments(){
-        return this.authHttp.get(this.baseUrl + 'departments')
-        .map((response: any) => response.json())
-        .catch(this.handleError);
-    }
 
-    getPositions(){
-        return this.authHttp.get(this.baseUrl + 'positions')
-        .map((response: any) => response.json())
-        .catch(this.handleError);
-    }
+    // getStaffs(page?: number, itemsPerPage?: number){
+    //     const paginatedResult: PaginatedResult<SharedStaffsList[]> = new PaginatedResult<SharedStaffsList[]>();
+    //     let queryString = '?';
 
-    getStaffs(page?: number, itemsPerPage?: number){
-        const paginatedResult: PaginatedResult<SharedStaffsList[]> = new PaginatedResult<SharedStaffsList[]>();
-        let queryString = '?';
-
-        if (page != null && itemsPerPage != null) {
-            queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
-    }
-        return this.authHttp
-        .get(this.baseUrl + 'staffs' + queryString)
-        .map((response: Response) => {
-            paginatedResult.result = response.json();
-            if (response.headers.get('Pagination') != null) {
-              paginatedResult.pagination = JSON.parse(
-                response.headers.get('Pagination')
-              );
-            }
+    //     if (page != null && itemsPerPage != null) {
+    //         queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+    // }
+    //     return this.authHttp
+    //     .get(this.baseUrl + 'staffs' + queryString)
+    //     .map((response: Response) => {
+    //         paginatedResult.result = response.json();
+    //         if (response.headers.get('Pagination') != null) {
+    //           paginatedResult.pagination = JSON.parse(
+    //             response.headers.get('Pagination')
+    //           );
+    //         }
     
-            return paginatedResult;
-          })
-        .catch(this.handleError);
-    }
+    //         return paginatedResult;
+    //       })
+    //     .catch(this.handleError);
+    // }
 
     getStaff(id): Observable<PatientStaffDetailed>{
         return this.authHttp.get(this.baseUrl + 'staff/' + id)

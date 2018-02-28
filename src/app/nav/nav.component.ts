@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    console.log('nav init');
+    // console.log('nav init');
     this.userLoggedIn = this.authService.userLoggedIn;
     if(localStorage.getItem('Token'))
       this.userForLogin  = 'nobody';
@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
           this.router.navigate(['/admin/staffs']);
         this.userForLogin = 'nobody';
       });    
-    console.log(this.userForLogin);
+    // console.log(this.userForLogin);
   }
 
   Logout(user){
@@ -64,12 +64,12 @@ export class NavComponent implements OnInit {
 
     if(this.authService.loggedIn(user) && user == this.userLoggedIn)
     {
-      console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
+      // console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
       return true;
     }
     else
     {
-      console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
+      // console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
       return false;
     }          
   }

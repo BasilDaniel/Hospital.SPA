@@ -40,7 +40,7 @@ export const appRoutes: Routes = [
         canActivate: [StaffAuthGuard],
         children: [
             { path: 'staff/staff/:id', component: SharedStaffDetailedComponent},
-            { path: 'staff/staffs', component: SharedStaffsListComponent},
+            { path: 'staff/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'staff/patient/:id', component: PatientDetailedComponent},
             { path: 'staff/patients', component: SharedPatientsListComponent},
             { path: 'staff/appointment/:id', component: SharedAppointmentDetailedComponent}            
@@ -55,7 +55,7 @@ export const appRoutes: Routes = [
             { path: 'admin/admin/:id', component: AdminDetailedComponent},
             { path: 'admin/admins', component: AdminsListComponent},
             { path: 'admin/staff/:id', component: SharedStaffDetailedComponent},
-            { path: 'admin/staffs', component: SharedStaffsListComponent},
+            { path: 'admin/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'admin/patient/:id', component: PatientDetailedComponent},
             { path: 'admin/patients', component: SharedPatientsListComponent},
             { path: 'admin/appointment/:id', component: SharedAppointmentDetailedComponent},

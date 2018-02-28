@@ -31,7 +31,7 @@ constructor(private http: Http) { }
                     localStorage.setItem('Token', staff.tokenString);
                     this.decodedToken = this.jwtHelper.decodeToken(staff.tokenString);
                     this.Token = staff.tokenString;
-                    this.userLoggedIn = this.decodedToken.role;
+                    this.userLoggedIn = user;
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);
@@ -43,19 +43,19 @@ constructor(private http: Http) { }
                     localStorage.setItem('Token', patient.tokenString);
                     this.decodedToken = this.jwtHelper.decodeToken(patient.tokenString);
                     this.Token = patient.tokenString;
-                    this.userLoggedIn = this.decodedToken.role;
+                    this.userLoggedIn = user;
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);
         }
         if(user == 'admin'){
             return this.http.post(this.adminAuthUrl + 'login', model, this.requestOptions()).map((response: Response) => {
-                const staff = response.json();
-                if (staff){
-                    localStorage.setItem('Token', staff.tokenString);
-                    this.decodedToken = this.jwtHelper.decodeToken(staff.tokenString);
-                    this.Token = staff.tokenString;
-                    this.userLoggedIn = this.decodedToken.role;
+                const admin = response.json();
+                if (admin){
+                    localStorage.setItem('Token', admin.tokenString);
+                    this.decodedToken = this.jwtHelper.decodeToken(admin.tokenString);
+                    this.Token = admin.tokenString;
+                    this.userLoggedIn = user;
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);

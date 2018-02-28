@@ -8,19 +8,21 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import { StaffService } from '../_services/staff.service';
 import { SharedStaffsList } from '../_models/SharedStaffsList';
+import { SharedService } from '../_services/shared.service';
 
 @Injectable()
 export class SharedStaffsListResolver implements Resolve<SharedStaffsList> {
     pageSize = 5;
     pageNumber = 1;
 
-    constructor(private patientService: PatientService,
+    constructor(       
+        private sharedService: SharedService,
         private router: Router, 
         private alertify: AlertifyService,
         private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<SharedStaffsList> {
-        return this.patientService.getStaffs(this.pageNumber, this.pageSize).catch(error => {
+        return this.sharedService.getStaffs(this.pageNumber, this.pageSize).catch(error => {
             this.alertify.error('Проблемы при получении данных');
             this.router.navigate(['/home']);
             return Observable.of(null);
