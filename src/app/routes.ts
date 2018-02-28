@@ -19,6 +19,8 @@ import { SharedPositionsListComponent } from './shared/sharedPositionsList/share
 import { PatientStaffDetailedComponent } from './patient/patientStaffDetailed/patientStaffDetailed.component';
 import { PatientDetailedResolver } from './_resolvers/patientDetailed.resolver';
 import { SharedStaffsListResolver } from './_resolvers/sharedStaffsList.resolver';
+import { SharedPatientsListResolver } from './_resolvers/sharedPatientsList.resolver';
+import { SharedAppointmentsListResolver } from './_resolvers/sharedAppointmentsList.resolver';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -42,7 +44,7 @@ export const appRoutes: Routes = [
             { path: 'staff/staff/:id', component: SharedStaffDetailedComponent},
             { path: 'staff/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'staff/patient/:id', component: PatientDetailedComponent},
-            { path: 'staff/patients', component: SharedPatientsListComponent},
+            { path: 'staff/patients', component: SharedPatientsListComponent, resolve:{users: SharedPatientsListResolver}},
             { path: 'staff/appointment/:id', component: SharedAppointmentDetailedComponent}            
         ]
     },
@@ -57,9 +59,9 @@ export const appRoutes: Routes = [
             { path: 'admin/staff/:id', component: SharedStaffDetailedComponent},
             { path: 'admin/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'admin/patient/:id', component: PatientDetailedComponent},
-            { path: 'admin/patients', component: SharedPatientsListComponent},
+            { path: 'admin/patients', component: SharedPatientsListComponent, resolve:{users: SharedPatientsListResolver}},
             { path: 'admin/appointment/:id', component: SharedAppointmentDetailedComponent},
-            { path: 'admin/appointments', component: SharedAppointmentsListComponent},
+            { path: 'admin/appointments', component: SharedAppointmentsListComponent, resolve:{users: SharedAppointmentsListResolver}},
             { path: 'admin/department/:id', component: SharedDepartmentDetailedComponent},
             { path: 'admin/departments', component: SharedDepartmentsListComponent},
             { path: 'admin/disease/:id', component: SharedDiseaseDetailedComponent},

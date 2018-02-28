@@ -38,6 +38,8 @@ import { PatientDetailedResolver } from './_resolvers/patientDetailed.resolver';
 import { SharedStaffsListResolver } from './_resolvers/sharedStaffsList.resolver';
 import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
 import { SharedService } from './_services/shared.service';
+import { SharedPatientsListResolver } from './_resolvers/sharedPatientsList.resolver';
+import { SharedAppointmentsListResolver } from './_resolvers/sharedAppointmentsList.resolver';
 
 
 @NgModule({
@@ -84,7 +86,9 @@ import { SharedService } from './_services/shared.service';
     StaffService,
     SharedService,
     PatientDetailedResolver,
-    SharedStaffsListResolver
+    SharedStaffsListResolver,
+    SharedPatientsListResolver,
+    SharedAppointmentsListResolver
   ],
   bootstrap: [AppComponent]
 })

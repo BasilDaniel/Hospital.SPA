@@ -9,6 +9,8 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { PaginatedResult } from '../_models/pagination';
 import { SharedStaffsList } from '../_models/SharedStaffsList';
+import { SharedPatientsList } from '../_models/SharedPatientsList';
+import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
 
 @Injectable()
 export class SharedService {
@@ -26,19 +28,19 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
             return environment.apiAdminUrl;
     }
 
-    getDepartments(){
+    getDepartmentsList(){
         return this.authHttp.get(this.getBaseUrl() + 'departments')
         .map((response: any) => response.json())
         .catch(this.handleError);
     }
 
-    getPositions(){
+    getPositionsList(){
         return this.authHttp.get(this.getBaseUrl() + 'positions')
         .map((response: any) => response.json())
         .catch(this.handleError);
     }
 
-    getStaffs(page?: number, itemsPerPage?: number){
+    getStaffsList(page?: number, itemsPerPage?: number){
         const paginatedResult: PaginatedResult<SharedStaffsList[]> = new PaginatedResult<SharedStaffsList[]>();
         let queryString = '?';
 
@@ -47,6 +49,50 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
     }
         return this.authHttp
         .get(this.getBaseUrl() + 'staffs' + queryString)
+        .map((response: Response) => {
+            paginatedResult.result = response.json();
+            if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(
+                response.headers.get('Pagination')
+              );
+            }
+    
+            return paginatedResult;
+          })
+        .catch(this.handleError);
+    }
+
+    getPatientsList(page?: number, itemsPerPage?: number){
+        const paginatedResult: PaginatedResult<SharedPatientsList[]> = new PaginatedResult<SharedPatientsList[]>();
+        let queryString = '?';
+
+        if (page != null && itemsPerPage != null) {
+            queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+    }
+        return this.authHttp
+        .get(this.getBaseUrl() + 'patients' + queryString)
+        .map((response: Response) => {
+            paginatedResult.result = response.json();
+            if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(
+                response.headers.get('Pagination')
+              );
+            }
+    
+            return paginatedResult;
+          })
+        .catch(this.handleError);
+    }
+    
+    getAppointmentsList(page?: number, itemsPerPage?: number){
+        const paginatedResult: PaginatedResult<SharedAppointmentsList[]> = new PaginatedResult<SharedAppointmentsList[]>();
+        let queryString = '?';
+
+        if (page != null && itemsPerPage != null) {
+            queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+    }
+        return this.authHttp
+        .get(this.getBaseUrl() + 'appointments' + queryString)
         .map((response: Response) => {
             paginatedResult.result = response.json();
             if (response.headers.get('Pagination') != null) {

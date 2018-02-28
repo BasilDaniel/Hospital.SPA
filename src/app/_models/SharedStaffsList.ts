@@ -7,6 +7,6 @@ export interface SharedStaffsList {
     name: string;
     middleName: string;
     birthdate: Date;
-    position?: SharedPositionsList[];
-    department?: SharedDepartmentsList[];
+    position?: SharedPositionsList;
+    department?: SharedDepartmentsList;
 }

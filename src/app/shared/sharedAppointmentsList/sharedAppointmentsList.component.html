@@ -1,3 +1,76 @@
-<p>
-  sharedAppointmentsList works!
-</p>
+<div class="container filter-conteiner">
+
+  <div class="row">
+    <form class="form-inline" #form="ngForm" (ngSubmit)="loadAppointments()" novalidate>
+      <div class="form-group">
+        <label for="name">ФИО</label>
+        <input type="string" class="form-control" style="width: 270px" id="name" name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="departments">Отделения: </label>
+        <select class="form-control" style="width: 170px" id="departments" name="departments">
+          <option *ngFor="let item of sharedDepartmentsList" [value]="item?.name">
+            {{item?.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="positions">Врачи: </label>
+        <select class="form-control" style="width: 170px" id="positions" name="positions">
+          <option *ngFor="let item of sharedPositionsList" [value]="item?.name">
+            {{item?.name}}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-left:10px">Найти</button>
+      <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
+      <!-- <div class="pull-right">
+          <label style="margin-right: 10px">Order By: </label>
+          <div class="btn-group">
+            <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="lastActive" (click)="loadUsers()">Last Active</button>
+            <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="created" (click)="loadUsers()">Newest Members</button>
+          </div>
+      </div> -->
+    </form>
+  </div>
+  <br>  
+</div>
+
+
+<h4 class="text-center">Приемы врачей</h4>
+<table class="table table-hover table-bordered table-container  table-aligment">
+  <thead>
+      <tr>
+          <th>Дата</th>
+          <th>Длительность</th>
+          <th>Отделения</th>
+          <th>Врач</th>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of sharedAppointmentsList">
+          <td>{{item.dateTime}}</td>
+          <td>{{item.duration}}</td>
+          <td>{{item.staff.department.name}}</td>
+          <td>{{item.staff.position.name}}</td>
+          <td>{{item.staff.familyName}}</td>
+          <td>{{item.staff.name}}</td>
+          <td>{{item.staff.middleName}}</td>
+      </tr>        
+  </tbody>
+</table>
+
+  <div class="text-center">
+      <pagination [boundaryLinks]="true" 
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage" 
+      (pageChanged)="pageChanged($event)"
+      [(ngModel)]="pagination.currentPage" class="pagination-sm"
+      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>

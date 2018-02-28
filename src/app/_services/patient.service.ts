@@ -25,28 +25,6 @@ export class PatientService {
         .catch(this.handleError);
     }
 
-    // getStaffs(page?: number, itemsPerPage?: number){
-    //     const paginatedResult: PaginatedResult<SharedStaffsList[]> = new PaginatedResult<SharedStaffsList[]>();
-    //     let queryString = '?';
-
-    //     if (page != null && itemsPerPage != null) {
-    //         queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
-    // }
-    //     return this.authHttp
-    //     .get(this.baseUrl + 'staffs' + queryString)
-    //     .map((response: Response) => {
-    //         paginatedResult.result = response.json();
-    //         if (response.headers.get('Pagination') != null) {
-    //           paginatedResult.pagination = JSON.parse(
-    //             response.headers.get('Pagination')
-    //           );
-    //         }
-    
-    //         return paginatedResult;
-    //       })
-    //     .catch(this.handleError);
-    // }
-
     getStaff(id): Observable<PatientStaffDetailed>{
         return this.authHttp.get(this.baseUrl + 'staff/' + id)
         .map(response => <PatientStaffDetailed>response.json())

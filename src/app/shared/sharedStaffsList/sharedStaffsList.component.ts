@@ -22,7 +22,6 @@ export class SharedStaffsListComponent implements OnInit {
   sharedPositionsList: SharedPositionsList[];
 
   constructor( 
-    private patientService: PatientService,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
     private route: ActivatedRoute) { }
@@ -38,21 +37,21 @@ export class SharedStaffsListComponent implements OnInit {
   }
 
   loadDepartments(){
-    this.sharedService.getDepartments()
+    this.sharedService.getDepartmentsList()
     .subscribe((data: SharedDepartmentsList[]) => {      
       this.sharedDepartmentsList = data;
     })  
   }
 
   loadPositions(){
-    this.sharedService.getPositions()
+    this.sharedService.getPositionsList()
     .subscribe((data: SharedPositionsList[]) => {      
       this.sharedPositionsList = data;
     })  
   }
 
   loadStaffs() {
-    this.sharedService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.sharedService.getStaffsList(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<SharedStaffsList[]>) => {
         this.sharedStaffsList = res.result;
         this.pagination = res.pagination;

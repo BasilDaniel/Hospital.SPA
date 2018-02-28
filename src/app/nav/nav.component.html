@@ -11,7 +11,7 @@
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-      <!-- StaffNavbar links -->
+      <!-- AdminNavbar links -->
       <ul class="nav navbar-nav" *ngIf="LoggedIn('admin')">
         <li class="dropdown" dropdown>
             <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудники<span class="caret"></span></a>
@@ -25,6 +25,7 @@
         <li routerLinkActive="active"><a [routerLink]="['/admin/departments']">Отделения</a></li>
         <li routerLinkActive="active"><a [routerLink]="['/admin/diseases']">Заболевания</a></li>
         <li routerLinkActive="active"><a [routerLink]="['/admin/patients']">Пациенты</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/appointments']">Приемы</a></li>
       </ul>
 
       <!-- AdminNavbar links -->
