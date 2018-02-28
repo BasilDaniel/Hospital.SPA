@@ -21,6 +21,7 @@ import { PatientDetailedResolver } from './_resolvers/patientDetailed.resolver';
 import { SharedStaffsListResolver } from './_resolvers/sharedStaffsList.resolver';
 import { SharedPatientsListResolver } from './_resolvers/sharedPatientsList.resolver';
 import { SharedAppointmentsListResolver } from './_resolvers/sharedAppointmentsList.resolver';
+import { AdminsListResolver } from './_resolvers/adminsList.resolver';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -55,7 +56,7 @@ export const appRoutes: Routes = [
         canActivate: [AdminAuthGuard],
         children: [
             { path: 'admin/admin/:id', component: AdminDetailedComponent},
-            { path: 'admin/admins', component: AdminsListComponent},
+            { path: 'admin/admins', component: AdminsListComponent, resolve:{users: AdminsListResolver}},
             { path: 'admin/staff/:id', component: SharedStaffDetailedComponent},
             { path: 'admin/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'admin/patient/:id', component: PatientDetailedComponent},
