@@ -40,13 +40,21 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
         .catch(this.handleError);
     }
 
-    getStaffsList(page?: number, itemsPerPage?: number){
+    getStaffsList(page?: number, itemsPerPage?: number, userParams?: any){
         const paginatedResult: PaginatedResult<SharedStaffsList[]> = new PaginatedResult<SharedStaffsList[]>();
         let queryString = '?';
 
         if (page != null && itemsPerPage != null) {
             queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
-    }
+        }
+
+        if(userParams != null){
+            queryString +=
+            'name=' + userParams.name +
+            '&department=' + userParams.department +
+            '&position=' + userParams.position;
+        }
+        console.log(queryString);
         return this.authHttp
         .get(this.getBaseUrl() + 'staffs' + queryString)
         .map((response: Response) => {
@@ -62,13 +70,19 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
         .catch(this.handleError);
     }
 
-    getPatientsList(page?: number, itemsPerPage?: number){
+    getPatientsList(page?: number, itemsPerPage?: number, userParams?: any){
         const paginatedResult: PaginatedResult<SharedPatientsList[]> = new PaginatedResult<SharedPatientsList[]>();
         let queryString = '?';
 
         if (page != null && itemsPerPage != null) {
             queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
-    }
+        }
+
+        if(userParams != null){
+            queryString +=
+            'name=' + userParams.name;
+        }
+
         return this.authHttp
         .get(this.getBaseUrl() + 'patients' + queryString)
         .map((response: Response) => {

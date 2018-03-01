@@ -4,12 +4,12 @@
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadStaffs()" novalidate>
         <div class="form-group">
           <label for="name">ФИО</label>
-          <input type="string" class="form-control" style="width: 270px" id="name" name="name">
+          <input type="string" class="form-control" style="width: 270px" id="name" name="name" (keyup)="loadStaffs()" [(ngModel)]="userParams.name">
         </div>
   
         <div class="form-group">
           <label for="departments">Отделения: </label>
-          <select class="form-control" style="width: 170px" id="departments" name="departments">
+          <select class="form-control" style="width: 170px" id="departments" name="departments" (change)="loadStaffs()" [(ngModel)]="userParams.department">
             <option *ngFor="let item of sharedDepartmentsList" [value]="item?.name">
               {{item?.name}}
             </option>
@@ -18,13 +18,12 @@
 
         <div class="form-group">
           <label for="positions">Врачи: </label>
-          <select class="form-control" style="width: 170px" id="positions" name="positions">
+          <select class="form-control" style="width: 170px" id="positions" name="positions" (change)="loadStaffs()" [(ngModel)]="userParams.position">
             <option *ngFor="let item of sharedPositionsList" [value]="item?.name">
               {{item?.name}}
             </option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-left:10px">Найти</button>
         <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
         <!-- <div class="pull-right">
             <label style="margin-right: 10px">Order By: </label>

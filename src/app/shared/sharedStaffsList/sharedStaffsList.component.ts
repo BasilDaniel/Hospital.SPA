@@ -18,6 +18,7 @@ import { SharedService } from '../../_services/shared.service';
 export class SharedStaffsListComponent implements OnInit {
   sharedStaffsList: SharedStaffsList[];
   pagination: Pagination;
+  userParams: any = {};
   sharedDepartmentsList: SharedDepartmentsList[];
   sharedPositionsList: SharedPositionsList[];
 
@@ -34,6 +35,10 @@ export class SharedStaffsListComponent implements OnInit {
     
     this.loadDepartments();
     this.loadPositions();
+
+    this.userParams.name = '';
+    this.userParams.department = '';
+    this.userParams.position = '';
   }
 
   loadDepartments(){
@@ -51,13 +56,20 @@ export class SharedStaffsListComponent implements OnInit {
   }
 
   loadStaffs() {
-    this.sharedService.getStaffsList(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.sharedService.getStaffsList(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<SharedStaffsList[]>) => {
         this.sharedStaffsList = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
       });
+  }
+
+  resetFilters() {
+    this.userParams.name = '';
+    this.userParams.department = '';
+    this.userParams.position = '';
+    this.loadStaffs();
   }
 
   pageChanged(event: any): void {
