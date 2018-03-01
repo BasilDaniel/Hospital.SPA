@@ -11,6 +11,8 @@ import { PaginatedResult } from '../_models/pagination';
 import { SharedStaffsList } from '../_models/SharedStaffsList';
 import { SharedPatientsList } from '../_models/SharedPatientsList';
 import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
+import { SharedPatientDetailed } from '../_models/SharedPatientDetailed';
+import { SharedStaffDetailed } from '../_models/SharedStaffDetailed';
 
 @Injectable()
 export class SharedService {
@@ -54,7 +56,7 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
             '&department=' + userParams.department +
             '&position=' + userParams.position;
         }
-        
+
         return this.authHttp
         .get(this.getBaseUrl() + 'staffs' + queryString.toLowerCase())
         .map((response: Response) => {
@@ -117,6 +119,18 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
     
             return paginatedResult;
           })
+        .catch(this.handleError);
+    }
+
+    getPatient(id): Observable<SharedPatientDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'patient/' + id)
+        .map(response => <SharedPatientDetailed>response.json())
+        .catch(this.handleError);
+    }
+
+    getStaff(id): Observable<SharedStaffDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'staff/' + id)
+        .map(response => <SharedStaffDetailed>response.json())
         .catch(this.handleError);
     }
 

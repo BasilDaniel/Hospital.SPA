@@ -7,6 +7,6 @@ export interface SharedPatientDetailed {
     name: string;
     middleName: string;
     birthdate: Date;
-    patientDiseases?: SharedPatientDiseasesList;
-    appointments?: SharedAppointmentDetailed;
+    patientDiseases?: SharedPatientDiseasesList[];
+    appointments?: SharedAppointmentDetailed[];
 }

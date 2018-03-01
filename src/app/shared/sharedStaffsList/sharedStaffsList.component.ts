@@ -9,6 +9,7 @@ import { SharedStaffsList } from '../../_models/SharedStaffsList';
 import { SharedDepartmentsList } from '../../_models/SharedDepartmentsList';
 import { SharedPositionsList } from '../../_models/SharedPositionsList';
 import { SharedService } from '../../_services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sharedStaffsList',
@@ -23,9 +24,11 @@ export class SharedStaffsListComponent implements OnInit {
   sharedPositionsList: SharedPositionsList[];
 
   constructor( 
+    private authService: AuthService,
+    private router: Router,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -39,6 +42,11 @@ export class SharedStaffsListComponent implements OnInit {
     this.userParams.name = '';
     this.userParams.department = '';
     this.userParams.position = '';
+  }
+
+  linkToUser(id){
+    let path = '/' + this.authService.userLoggedIn + '/staff';
+    this.router.navigate([path, id]);
   }
 
   loadDepartments(){

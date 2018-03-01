@@ -3,7 +3,8 @@ import { SharedPatientsList } from '../../_models/SharedPatientsList';
 import { Pagination, PaginatedResult } from '../../_models/pagination';
 import { SharedService } from '../../_services/shared.service';
 import { AlertifyService } from '../../_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-sharedPatientsList',
@@ -15,6 +16,8 @@ export class SharedPatientsListComponent implements OnInit {
   pagination: Pagination;
 
   constructor(
+    private router: Router,
+    private authService: AuthService,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
     private route: ActivatedRoute) { }
@@ -24,6 +27,11 @@ export class SharedPatientsListComponent implements OnInit {
       this.sharedPatientsList = data['users'].result;
       this.pagination = data['users'].pagination;
       })
+  }
+
+  linkToUser(id){
+    let path = '/' + this.authService.userLoggedIn + '/patient';
+    this.router.navigate([path, id]);
   }
 
   loadPatients() {

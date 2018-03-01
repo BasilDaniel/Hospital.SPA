@@ -5,8 +5,9 @@ import { SharedDepartmentsList } from '../../_models/SharedDepartmentsList';
 import { SharedPositionsList } from '../../_models/SharedPositionsList';
 import { AdminService } from '../../_services/admin.service';
 import { AlertifyService } from '../../_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../_services/shared.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-adminsList',
@@ -19,6 +20,8 @@ export class AdminsListComponent implements OnInit {
   sharedPositionsList: SharedPositionsList[];
 
   constructor(
+    private router: Router,
+    private authService: AuthService,
     private adminService: AdminService,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
@@ -29,33 +32,11 @@ export class AdminsListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.adminsList = data['users'];
       console.log(this.adminsList);
-      });
-    
-    this.loadDepartments();
-    this.loadPositions();
+      });    
   }
 
-  loadDepartments(){
-    this.sharedService.getDepartmentsList()
-    .subscribe((data: SharedDepartmentsList[]) => {      
-      this.sharedDepartmentsList = data;
-    })  
+  linkToUser(id){
+    let path = '/' + this.authService.userLoggedIn + '/admin';
+    this.router.navigate([path, id]);
   }
-
-  loadPositions(){
-    this.sharedService.getPositionsList()
-    .subscribe((data: SharedPositionsList[]) => {      
-      this.sharedPositionsList = data;
-    })  
-  }
-
-  loadAdmins() {
-    this.adminService.getAdminsList()
-      .subscribe((res: AdminsList[]) => {
-        this.adminsList = res;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
-
 }

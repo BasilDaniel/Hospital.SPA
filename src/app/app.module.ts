@@ -42,6 +42,10 @@ import { SharedPatientsListResolver } from './_resolvers/sharedPatientsList.reso
 import { SharedAppointmentsListResolver } from './_resolvers/sharedAppointmentsList.resolver';
 import { AdminService } from './_services/admin.service';
 import { AdminsListResolver } from './_resolvers/adminsList.resolver';
+import { SharedPatientDetailedResolver } from './_resolvers/sharedPatientDetailed.resolver';
+import { AdminDetailedResolver } from './_resolvers/adminDetailed.resolver';
+import { SharedStaffDetailedResolver } from './_resolvers/sharedStaffDetailed.resolver';
+import { SharePositionsListResolver } from './_resolvers/sharedPositionsList.resolver';
 
 
 @NgModule({
@@ -92,7 +96,11 @@ import { AdminsListResolver } from './_resolvers/adminsList.resolver';
     SharedStaffsListResolver,
     SharedPatientsListResolver,
     SharedAppointmentsListResolver,
-    AdminsListResolver
+    SharedPatientDetailedResolver,
+    AdminsListResolver,
+    AdminDetailedResolver,
+    SharedStaffDetailedResolver,
+    SharePositionsListResolver
   ],
   bootstrap: [AppComponent]
 })

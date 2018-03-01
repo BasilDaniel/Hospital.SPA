@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { AdminsList } from '../_models/AdminsList';
+import { AdminDetailed } from '../_models/AdminDetailed';
 
 @Injectable()
 export class AdminService {
@@ -17,6 +18,12 @@ constructor(private authHttp: AuthHttp) { }
 getAdminsList(){
     return this.authHttp.get(this.baseUrl + 'admins')
     .map((response: any) => response.json())
+    .catch(this.handleError);
+}
+
+getAdmin(id): Observable<AdminDetailed>{
+    return this.authHttp.get(this.baseUrl + 'admin/' + id)
+    .map(response => <AdminDetailed>response.json())
     .catch(this.handleError);
 }
 
