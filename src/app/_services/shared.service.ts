@@ -54,9 +54,9 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
             '&department=' + userParams.department +
             '&position=' + userParams.position;
         }
-        console.log(queryString);
+        
         return this.authHttp
-        .get(this.getBaseUrl() + 'staffs' + queryString)
+        .get(this.getBaseUrl() + 'staffs' + queryString.toLowerCase())
         .map((response: Response) => {
             paginatedResult.result = response.json();
             if (response.headers.get('Pagination') != null) {
@@ -84,7 +84,7 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
         }
 
         return this.authHttp
-        .get(this.getBaseUrl() + 'patients' + queryString)
+        .get(this.getBaseUrl() + 'patients' + queryString.toLowerCase())
         .map((response: Response) => {
             paginatedResult.result = response.json();
             if (response.headers.get('Pagination') != null) {
@@ -106,7 +106,7 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
             queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
     }
         return this.authHttp
-        .get(this.getBaseUrl() + 'appointments' + queryString)
+        .get(this.getBaseUrl() + 'appointments' + queryString.toLowerCase())
         .map((response: Response) => {
             paginatedResult.result = response.json();
             if (response.headers.get('Pagination') != null) {

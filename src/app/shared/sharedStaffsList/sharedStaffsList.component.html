@@ -25,13 +25,6 @@
           </select>
         </div>
         <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
-        <!-- <div class="pull-right">
-            <label style="margin-right: 10px">Order By: </label>
-            <div class="btn-group">
-              <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="lastActive" (click)="loadUsers()">Last Active</button>
-              <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="created" (click)="loadUsers()">Newest Members</button>
-            </div>
-        </div> -->
       </form>
     </div>
     <br>  
@@ -50,7 +43,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of sharedStaffsList">
+        <tr *ngFor="let item of sharedStaffsList" [routerLink]="['/admin/staff', item.id]">
             <td>{{item.department.name}}</td>
             <td>{{item.position.name}}</td>
             <td>{{item.familyName}}</td>
