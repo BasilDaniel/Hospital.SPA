@@ -23,7 +23,6 @@ export class SharedPositionsListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.sharedPositionsList = data['users'];
-      console.log('sharedPositionsList ' + this.sharedPositionsList);
       });
   }
 

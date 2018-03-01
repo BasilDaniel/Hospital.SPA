@@ -5,19 +5,19 @@ import { AuthService } from '../_services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
-import { SharedPositionsList } from '../_models/SharedPositionsList';
 import { SharedService } from '../_services/shared.service';
+import { SharedDepartmentsList } from '../_models/SharedDepartmentsList';
 
 @Injectable()
-export class SharedPositionsListResolver implements Resolve<SharedPositionsList> {
+export class SharedDepartmentsListResolver implements Resolve<SharedDepartmentsList> {
 
     constructor(private sharedService: SharedService,
         private router: Router, 
         private alertify: AlertifyService,
         private authService: AuthService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<SharedPositionsList> {
-        return this.sharedService.getPositionsList().catch(error => {
+    resolve(route: ActivatedRouteSnapshot): Observable<SharedDepartmentsList> {
+        return this.sharedService.getDepartmentsList().catch(error => {
             this.alertify.error('Проблемы при получении данных');
             this.router.navigate(['/home']);
             return Observable.of(null);

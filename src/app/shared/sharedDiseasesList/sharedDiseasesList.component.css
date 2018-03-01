@@ -1,0 +1,11 @@
+.table-aligment{
+    max-width: 30%;
+    margin-left: auto;
+    margin-right: auto;  
+}
+.filter-conteiner{
+    max-width: 500px;
+}
+tr{
+    cursor: pointer;
+}

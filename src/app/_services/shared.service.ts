@@ -13,6 +13,7 @@ import { SharedPatientsList } from '../_models/SharedPatientsList';
 import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
 import { SharedPatientDetailed } from '../_models/SharedPatientDetailed';
 import { SharedStaffDetailed } from '../_models/SharedStaffDetailed';
+import { SharedDiseasesList } from '../_models/SharedDiseasesList';
 
 @Injectable()
 export class SharedService {
@@ -109,6 +110,34 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
     }
         return this.authHttp
         .get(this.getBaseUrl() + 'appointments' + queryString.toLowerCase())
+        .map((response: Response) => {
+            paginatedResult.result = response.json();
+            if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(
+                response.headers.get('Pagination')
+              );
+            }
+    
+            return paginatedResult;
+          })
+        .catch(this.handleError);
+    }
+
+    getDiseasesList(page?: number, itemsPerPage?: number, userParams?: any){
+        const paginatedResult: PaginatedResult<SharedDiseasesList[]> = new PaginatedResult<SharedDiseasesList[]>();
+        let queryString = '?';
+
+        if (page != null && itemsPerPage != null) {
+            queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+        }
+
+        if(userParams != null){
+            queryString +=
+            'name=' + userParams.name;
+        }
+
+        return this.authHttp
+        .get(this.getBaseUrl() + 'diseases' + queryString.toLowerCase())
         .map((response: Response) => {
             paginatedResult.result = response.json();
             if (response.headers.get('Pagination') != null) {

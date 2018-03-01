@@ -1,3 +1,36 @@
-<p>
-  sharedDiseasesList works!
-</p>
+<div class="container filter-conteiner">
+
+    <div class="row">
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadDiseases()" novalidate>
+        <div class="form-group">
+          <label for="name">Название</label>
+          <input type="string" class="form-control" style="width: 270px" id="name" name="name" (keyup)="loadDiseases()" [(ngModel)]="userParams.name">
+        </div>  
+      </form>
+    </div>
+    <br>  
+  </div>
+  
+
+<h4 class="text-center">Заболевания</h4>
+  <table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Название</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of sharedDiseasesList" (click)="linkToUser(item.id)">
+            <td>{{item.name}}</td>
+        </tr>        
+    </tbody>
+  </table>
+
+    <div class="text-center">
+        <pagination [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage" 
+        (pageChanged)="pageChanged($event)"
+        [(ngModel)]="pagination.currentPage" class="pagination-sm"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+    </div>

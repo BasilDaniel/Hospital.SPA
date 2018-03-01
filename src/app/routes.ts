@@ -26,7 +26,9 @@ import { SharedPatientDetailedResolver } from './_resolvers/sharedPatientDetaile
 import { SharedPatientDetailedComponent } from './shared/sharedPatientDetailed/sharedPatientDetailed.component';
 import { AdminDetailedResolver } from './_resolvers/adminDetailed.resolver';
 import { SharedStaffDetailedResolver } from './_resolvers/sharedStaffDetailed.resolver';
-import { SharePositionsListResolver } from './_resolvers/sharedPositionsList.resolver';
+import { SharedPositionsListResolver } from './_resolvers/sharedPositionsList.resolver';
+import { SharedDepartmentsListResolver } from './_resolvers/sharedDepartmentsList.resolver';
+import { SharedDiseasesListResolver } from './_resolvers/sharedDiseasesList.resolver';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -69,11 +71,11 @@ export const appRoutes: Routes = [
             { path: 'admin/appointment/:id', component: SharedAppointmentDetailedComponent},
             { path: 'admin/appointments', component: SharedAppointmentsListComponent, resolve:{users: SharedAppointmentsListResolver}},
             { path: 'admin/department/:id', component: SharedDepartmentDetailedComponent},
-            { path: 'admin/departments', component: SharedDepartmentsListComponent},
+            { path: 'admin/departments', component: SharedDepartmentsListComponent, resolve:{users: SharedDepartmentsListResolver}},
             { path: 'admin/disease/:id', component: SharedDiseaseDetailedComponent},
-            { path: 'admin/diseases', component: SharedDiseasesListComponent},
+            { path: 'admin/diseases', component: SharedDiseasesListComponent, resolve:{users: SharedDiseasesListResolver}},
             { path: 'admin/position/:id', component: SharedPositionDetailedComponent},
-            { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharePositionsListResolver}}            
+            { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharedPositionsListResolver}}            
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full'},

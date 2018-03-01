@@ -1,3 +1,13 @@
-<p>
-  sharedDepartmentsList works!
-</p>
+<h4 class="text-center">Отделения</h4>
+<table class="table table-hover table-bordered table-container  table-aligment">
+  <thead>
+      <tr>
+          <th>Наименование</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of sharedDepartmentsList" (click)="linkToUser(item.id)">      
+      <td>{{item.name}}</td>              
+    </tr>             
+  </tbody>
+</table>
