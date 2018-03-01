@@ -23,6 +23,8 @@ export class SharedDepartmentsListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.sharedDepartmentsList = data['users'];
+      }, error => {
+        this.alertify.error(error);
       });
   }
 

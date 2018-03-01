@@ -29,6 +29,10 @@ import { SharedStaffDetailedResolver } from './_resolvers/sharedStaffDetailed.re
 import { SharedPositionsListResolver } from './_resolvers/sharedPositionsList.resolver';
 import { SharedDepartmentsListResolver } from './_resolvers/sharedDepartmentsList.resolver';
 import { SharedDiseasesListResolver } from './_resolvers/sharedDiseasesList.resolver';
+import { SharedAppointmentDetailedResolver } from './_resolvers/sharedAppointmentDetailed.resolver';
+import { SharedDepartmentDetailedResolver } from './_resolvers/sharedDepartmentDetailed.resolver';
+import { SharedDiseaseDetailedResolver } from './_resolvers/sharedDiseaseDetailed.resolver';
+import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetailed.resolver';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -53,7 +57,9 @@ export const appRoutes: Routes = [
             { path: 'staff/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'staff/patient/:id', component: SharedPatientDetailedComponent, resolve:{users: SharedPatientDetailedResolver}},
             { path: 'staff/patients', component: SharedPatientsListComponent, resolve:{users: SharedPatientsListResolver}},
-            { path: 'staff/appointment/:id', component: SharedAppointmentDetailedComponent}            
+            { path: 'staff/appointment/:id', component: SharedAppointmentDetailedComponent, resolve:{users: SharedAppointmentDetailedResolver}},
+            { path: 'staff/disease/:id', component: SharedDiseaseDetailedComponent, resolve:{users: SharedDiseaseDetailedResolver}},
+            { path: 'staff/diseases', component: SharedDiseasesListComponent, resolve:{users: SharedDiseasesListResolver}},            
         ]
     },
     //Admin routes
@@ -68,13 +74,13 @@ export const appRoutes: Routes = [
             { path: 'admin/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
             { path: 'admin/patient/:id', component: SharedPatientDetailedComponent, resolve:{users: SharedPatientDetailedResolver}},
             { path: 'admin/patients', component: SharedPatientsListComponent, resolve:{users: SharedPatientsListResolver}},
-            { path: 'admin/appointment/:id', component: SharedAppointmentDetailedComponent},
+            { path: 'admin/appointment/:id', component: SharedAppointmentDetailedComponent, resolve:{users: SharedAppointmentDetailedResolver}},
             { path: 'admin/appointments', component: SharedAppointmentsListComponent, resolve:{users: SharedAppointmentsListResolver}},
-            { path: 'admin/department/:id', component: SharedDepartmentDetailedComponent},
+            { path: 'admin/department/:id', component: SharedDepartmentDetailedComponent, resolve:{users: SharedDepartmentDetailedResolver}},
             { path: 'admin/departments', component: SharedDepartmentsListComponent, resolve:{users: SharedDepartmentsListResolver}},
-            { path: 'admin/disease/:id', component: SharedDiseaseDetailedComponent},
+            { path: 'admin/disease/:id', component: SharedDiseaseDetailedComponent, resolve:{users: SharedDiseaseDetailedResolver}},
             { path: 'admin/diseases', component: SharedDiseasesListComponent, resolve:{users: SharedDiseasesListResolver}},
-            { path: 'admin/position/:id', component: SharedPositionDetailedComponent},
+            { path: 'admin/position/:id', component: SharedPositionDetailedComponent, resolve:{users: SharedPositionDetailedResolver}},
             { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharedPositionsListResolver}}            
         ]
     },

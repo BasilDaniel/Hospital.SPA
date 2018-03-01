@@ -14,6 +14,10 @@ import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
 import { SharedPatientDetailed } from '../_models/SharedPatientDetailed';
 import { SharedStaffDetailed } from '../_models/SharedStaffDetailed';
 import { SharedDiseasesList } from '../_models/SharedDiseasesList';
+import { SharedAppointmentDetailed } from '../_models/SharedAppointmentDetailed';
+import { SharedDepartmentDetailed } from '../_models/SharedDepartmentDetailed';
+import { SharedPositionDetailed } from '../_models/SharedPositionDetailed';
+import { SharedDiseaseDetailed } from '../_models/SharedDiseaseDetailed';
 
 @Injectable()
 export class SharedService {
@@ -101,13 +105,21 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
         .catch(this.handleError);
     }
     
-    getAppointmentsList(page?: number, itemsPerPage?: number){
+    getAppointmentsList(page?: number, itemsPerPage?: number, userParams?: any){
         const paginatedResult: PaginatedResult<SharedAppointmentsList[]> = new PaginatedResult<SharedAppointmentsList[]>();
         let queryString = '?';
 
         if (page != null && itemsPerPage != null) {
             queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
-    }
+        }
+
+        if(userParams != null){
+            queryString +=
+            'dateTime=' + userParams.dateTime +
+            '&department=' + userParams.department +
+            '&position=' + userParams.position;
+        }
+
         return this.authHttp
         .get(this.getBaseUrl() + 'appointments' + queryString.toLowerCase())
         .map((response: Response) => {
@@ -160,6 +172,30 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
     getStaff(id): Observable<SharedStaffDetailed>{
         return this.authHttp.get(this.getBaseUrl() + 'staff/' + id)
         .map(response => <SharedStaffDetailed>response.json())
+        .catch(this.handleError);
+    }
+
+    getAppointment(id): Observable<SharedAppointmentDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'appointment/' + id)
+        .map(response => <SharedAppointmentDetailed>response.json())
+        .catch(this.handleError);
+    }
+    
+    getDepartment(id): Observable<SharedDepartmentDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'department/' + id)
+        .map(response => <SharedDepartmentDetailed>response.json())
+        .catch(this.handleError);
+    }
+
+    getPosition(id): Observable<SharedPositionDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'position/' + id)
+        .map(response => <SharedPositionDetailed>response.json())
+        .catch(this.handleError);
+    }
+
+    getDisease(id): Observable<SharedDiseaseDetailed>{
+        return this.authHttp.get(this.getBaseUrl() + 'disease/' + id)
+        .map(response => <SharedDiseaseDetailed>response.json())
         .catch(this.handleError);
     }
 

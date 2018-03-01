@@ -27,6 +27,8 @@ export class SharedDiseasesListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.sharedDiseasesList = data['users'].result;
       this.pagination = data['users'].pagination;
+      }, error => {
+        this.alertify.error(error);
       });
 
       this.userParams.name = '';

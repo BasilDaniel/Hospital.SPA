@@ -4,19 +4,8 @@
     <form class="form-inline" #form="ngForm" (ngSubmit)="loadPatients()" novalidate>
       <div class="form-group">
         <label for="name">ФИО</label>
-        <input type="string" class="form-control" style="width: 270px" id="name" name="name">
+        <input type="string" class="form-control" style="width: 270px" id="name" name="name" (keyup)="loadPatients()" [(ngModel)]="userParams.name">
       </div>
-
-
-      <button type="submit" class="btn btn-primary" style="margin-left:10px">Найти</button>
-      <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
-      <!-- <div class="pull-right">
-          <label style="margin-right: 10px">Order By: </label>
-          <div class="btn-group">
-            <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="lastActive" (click)="loadUsers()">Last Active</button>
-            <button type="button" [(ngModel)]="userParams.orderBy" name="orderBy" class="btn btn-primary" btnRadio="created" (click)="loadUsers()">Newest Members</button>
-          </div>
-      </div> -->
     </form>
   </div>
   <br>  

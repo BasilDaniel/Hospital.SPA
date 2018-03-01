@@ -21,9 +21,10 @@ export class PatientDetailedComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('patient init');
     this.route.data.subscribe(data => {
       this.patientDetailed = data['user'];
+      }, error => {
+        this.alertify.error(error);
       });
   }
 

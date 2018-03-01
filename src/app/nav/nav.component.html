@@ -28,10 +28,10 @@
         <li routerLinkActive="active"><a [routerLink]="['/admin/appointments']">Приемы</a></li>
       </ul>
 
-      <!-- AdminNavbar links -->
+      <!-- StaffNavbar links -->
       <ul class="nav navbar-nav" *ngIf="LoggedIn('staff')">
         <li routerLinkActive="active"><a [routerLink]="['/staff/staffs']">Сотрудники</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/staff/disease']">Заболевания</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/staff/diseases']">Заболевания</a></li>
         <li routerLinkActive="active"><a [routerLink]="['/staff/patients']">Пациенты</a></li>
       </ul>
 

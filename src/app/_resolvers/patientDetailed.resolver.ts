@@ -20,7 +20,7 @@ export class PatientDetailedResolver implements Resolve<PatientDetailed> {
     resolve(route: ActivatedRouteSnapshot): Observable<PatientDetailed> {
         return this.patientService.getPatient(route.params['id']).catch(error => {
             this.alertify.error('Проблемы при получении данных');
-            this.router.navigate(['/patient/staffs']);
+            this.router.navigate(['/home']);
             return Observable.of(null);
         }); 
     }

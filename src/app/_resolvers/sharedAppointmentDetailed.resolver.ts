@@ -5,23 +5,19 @@ import { AuthService } from '../_services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
-import { StaffService } from '../_services/staff.service';
+import { SharedAppointmentDetailed } from '../_models/SharedAppointmentDetailed';
 import { SharedService } from '../_services/shared.service';
-import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
 
 @Injectable()
-export class SharedAppointmentsListResolver implements Resolve<SharedAppointmentsList> {
-    pageSize = 10;
-    pageNumber = 1;
+export class SharedAppointmentDetailedResolver implements Resolve<SharedAppointmentDetailed> {
 
-    constructor(       
-        private sharedService: SharedService,
+    constructor(private sharedService: SharedService,
         private router: Router, 
         private alertify: AlertifyService,
         private authService: AuthService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<SharedAppointmentsList> {
-        return this.sharedService.getAppointmentsList(this.pageNumber, this.pageSize).catch(error => {
+    resolve(route: ActivatedRouteSnapshot): Observable<SharedAppointmentDetailed> {
+        return this.sharedService.getAppointment(route.params['id']).catch(error => {
             this.alertify.error('Проблемы при получении данных');
             this.router.navigate(['/home']);
             return Observable.of(null);

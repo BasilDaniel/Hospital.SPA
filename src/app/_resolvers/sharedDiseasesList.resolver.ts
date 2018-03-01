@@ -12,7 +12,7 @@ import { SharedDiseasesList } from '../_models/SharedDiseasesList';
 
 @Injectable()
 export class SharedDiseasesListResolver implements Resolve<SharedDiseasesList> {
-    pageSize = 5;
+    pageSize = 10;
     pageNumber = 1;
 
     constructor(       

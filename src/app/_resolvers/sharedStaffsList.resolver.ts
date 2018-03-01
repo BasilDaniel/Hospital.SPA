@@ -12,7 +12,7 @@ import { SharedService } from '../_services/shared.service';
 
 @Injectable()
 export class SharedStaffsListResolver implements Resolve<SharedStaffsList> {
-    pageSize = 5;
+    pageSize = 10;
     pageNumber = 1;
 
     constructor(       

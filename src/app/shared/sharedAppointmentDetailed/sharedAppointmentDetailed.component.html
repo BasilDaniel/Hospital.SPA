@@ -1,3 +1,57 @@
-<p>
-  sharedAppointmentDetailed works!
-</p>
+<h4 class="text-center">Данные приема</h4>
+<table class="table table-hover table-bordered table-container table-aligment">
+  <thead>
+      <tr>
+          <th>Дата</th>
+          <th>Время</th>
+          <th>Длительность</th>
+          <th>Дополнительная информация</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{appointmentDetailed.dateTime | date:'dd.MM.yy'}}</td>
+          <td>{{appointmentDetailed.dateTime | date:'HH:mm'}}</td>
+          <td>{{appointmentDetailed.duration}}</td>
+          <td>{{appointmentDetailed.note}}</td>
+      </tr>        
+  </tbody>
+</table>
+<h4 class="text-center">Пациент</h4>
+<table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{appointmentDetailed.patient.familyName}}</td>
+            <td>{{appointmentDetailed.patient.name}}</td>
+            <td>{{appointmentDetailed.patient.middleName}}</td>
+        </tr>        
+    </tbody>
+  </table>
+  <h4 class="text-center">Врач</h4>
+  <table class="table table-hover table-bordered table-container  table-aligment">
+    <thead>
+        <tr>
+            <th>Отделение</th>
+            <th>Врач</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{appointmentDetailed.staff.department.name}}</td>
+            <td>{{appointmentDetailed.staff.position.name}}</td>
+            <td>{{appointmentDetailed.staff.familyName}}</td>
+            <td>{{appointmentDetailed.staff.name}}</td>
+            <td>{{appointmentDetailed.staff.middleName}}</td>
+        </tr>        
+    </tbody>
+  </table>

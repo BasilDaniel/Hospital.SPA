@@ -14,6 +14,7 @@ import { AuthService } from '../../_services/auth.service';
 export class SharedPatientsListComponent implements OnInit {
   sharedPatientsList: SharedPatientsList[];
   pagination: Pagination;
+  userParams: any = {};
 
   constructor(
     private router: Router,
@@ -26,7 +27,11 @@ export class SharedPatientsListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.sharedPatientsList = data['users'].result;
       this.pagination = data['users'].pagination;
-      })
+      }, error => {
+        this.alertify.error(error);
+      });
+
+      this.userParams.name = '';
   }
 
   linkToUser(id){
@@ -35,7 +40,7 @@ export class SharedPatientsListComponent implements OnInit {
   }
 
   loadPatients() {
-    this.sharedService.getPatientsList(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.sharedService.getPatientsList(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<SharedPatientsList[]>) => {
         this.sharedPatientsList = res.result;
         this.pagination = res.pagination;

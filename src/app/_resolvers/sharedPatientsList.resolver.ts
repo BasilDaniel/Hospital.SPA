@@ -12,7 +12,7 @@ import { SharedPatientsList } from '../_models/SharedPatientsList';
 
 @Injectable()
 export class SharedPatientsListResolver implements Resolve<SharedPatientsList> {
-    pageSize = 5;
+    pageSize = 10;
     pageNumber = 1;
 
     constructor(       

@@ -22,7 +22,7 @@ export class SharedPatientDetailedResolver implements Resolve<SharedPatientDetai
     resolve(route: ActivatedRouteSnapshot): Observable<SharedPatientDetailed> {
         return this.sharedService.getPatient(route.params['id']).catch(error => {
             this.alertify.error('Проблемы при получении данных');
-            this.router.navigate(['/patient/staffs']);
+            this.router.navigate(['/home']);
             return Observable.of(null);
         }); 
     }

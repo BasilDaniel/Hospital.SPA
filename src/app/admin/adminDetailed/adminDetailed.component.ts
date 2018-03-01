@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertifyService } from '../../_services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-adminDetailed',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDetailedComponent implements OnInit {
 
-  constructor() { }
+  adminDetailed: any;
+
+  constructor(
+    private alertify: AlertifyService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.adminDetailed = data['users'];
+      }, error => {
+        this.alertify.error(error);
+      });
   }
 
 }
