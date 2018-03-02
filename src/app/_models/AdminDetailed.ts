@@ -3,6 +3,7 @@ import { SharedDepartmentDetailed } from "./SharedDepartmentDetailed";
 
 export interface AdminDetailed {
     id: number;
+    login: string;
     familyName: string;
     name: string;
     middleName: string;

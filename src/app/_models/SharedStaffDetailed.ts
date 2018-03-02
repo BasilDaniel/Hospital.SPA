@@ -4,6 +4,7 @@ import { SharedAppointmentsList } from "./SharedAppointmentsList";
 
 export interface SharedStaffDetailed {
     id: number;
+    login: string;
     familyName: string;
     name: string;
     middleName: string;
