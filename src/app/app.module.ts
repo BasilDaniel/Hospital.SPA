@@ -3,8 +3,8 @@ import { AuthModule } from './auth/auth.module';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { StaffComponent } from './staff/staff.component';
@@ -83,10 +83,12 @@ import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetai
     BrowserModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     AuthModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     AuthService,

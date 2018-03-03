@@ -1,26 +1,67 @@
-<form #registerForm="ngForm" (ngSubmit)="PatientRegister()">
+<form [formGroup]="registerForm" (ngSubmit)="PatientRegister()">
     <h2 class="text-center text-primary">Введите свои данные</h2>
   
     <hr>
-  
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Имя" required name="name" [(ngModel)]="patientModel.name">
+
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('login').errors && registerForm.get('login').touched}">
+      <input type="text" class="form-control" placeholder="Логин" formControlName="login">
+      <span class="help-block" *ngIf="registerForm.get('login').hasError('required') && registerForm.get('login').touched">
+        Введите логин
+      </span>
     </div>
   
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Отчество" required name="middleName" [(ngModel)]="patientModel.middleName">
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('familyName').errors && registerForm.get('familyName').touched}">
+      <input type="text" class="form-control" placeholder="Фамилия" formControlName="familyName">
+      <span class="help-block" *ngIf="registerForm.get('familyName').hasError('required') && registerForm.get('familyName').touched">
+        Введите фамилию
+      </span>
     </div>
   
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Фамилия" required name="familyName" [(ngModel)]="patientModel.familyName">
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('name').errors && registerForm.get('name').touched}">
+      <input type="text" class="form-control" placeholder="Имя" formControlName="name">
+      <span class="help-block" *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched">
+        Введите имя
+      </span>
     </div>
   
-    <div class="form-group">
-      <input type="password" class="form-control" placeholder="Пароль" required name="password" [(ngModel)]="patientModel.password">
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('middleName').errors && registerForm.get('middleName').touched}">
+      <input type="text" class="form-control" placeholder="Отчество" formControlName="middleName">
+      <span class="help-block" *ngIf="registerForm.get('middleName').hasError('required') && registerForm.get('middleName').touched">
+        Введите отчество
+      </span>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('birthdate').errors && registerForm.get('birthdate').touched}">
+      <input type="text" class="form-control" placeholder="Дата рождения" bsDatepicker [bsConfig]="bsConfig" formControlName="birthdate">
+      <span class="help-block" *ngIf="registerForm.get('birthdate').hasError('required') && registerForm.get('birthdate').touched">
+        Введите дату рождения
+      </span>
+    </div>
+  
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('password').errors && registerForm.get('password').touched}">
+      <input type="password" class="form-control" placeholder="Пароль" formControlName="password">
+      <span class="help-block" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+        Введите пароль
+      </span>
+      <span class="help-block" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+        Пароль должен содержать более 4 знаков
+      </span>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched ||
+     registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}">
+      <input type="password" class="form-control" placeholder="Подтвердите пароль" formControlName="confirmPassword">
+      <span class="help-block" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+        Введите пароль
+      </span>
+      <span class="help-block" *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')">
+        Пароли не совпадают
+    </span>
+      
     </div>
   
     <div class="form-group text-center">
-      <button class="btn btn-success" type="submit">Зарегистрировать</button>
+      <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Зарегистрировать</button>
       <button class="btn btn-default" type="button" (click)="cancel()">Отмена</button>
     </div>
   </form>
