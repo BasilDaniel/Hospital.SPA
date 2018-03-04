@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertifyService } from '../../_services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patientStaffDetailed',
@@ -9,9 +11,16 @@ export class PatientStaffDetailedComponent implements OnInit {
 
   patientStaffDetailed: any;
 
-  constructor() { }
+  constructor(
+    private alertify: AlertifyService, 
+    private route: ActivatedRoute,) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.patientStaffDetailed = data['users'];
+      }, error => {
+        this.alertify.error(error);
+      });
   }
 
 }

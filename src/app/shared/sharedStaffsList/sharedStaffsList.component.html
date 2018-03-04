@@ -25,6 +25,7 @@
           </select>
         </div>
         <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Сбросить</button>
+        <button *ngIf="LoggedIn('admin')" type="button" class="btn btn-info" style="margin-left:10px" (click)="StaffRegister()">Новый врач</button>
       </form>
     </div>
     <br>  

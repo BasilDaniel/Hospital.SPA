@@ -1,10 +1,10 @@
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
-        <form [formGroup]="registerForm" (ngSubmit)="PatientRegister()">
-            <h2 class="text-center text-primary">Введите свои данные</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="AdminRegister()">
+            <h4 class="text-center text-primary">Введите данные сотрудника</h4>
           
             <hr>
-        
+          
             <div class="form-group" [ngClass]="{'has-error': registerForm.get('login').errors && registerForm.get('login').touched}">
               <input type="text" class="form-control" placeholder="Логин" formControlName="login">
               <span class="help-block" *ngIf="registerForm.get('login').hasError('required') && registerForm.get('login').touched">
@@ -32,13 +32,31 @@
                 Введите отчество
               </span>
             </div>
-        
+          
             <div class="form-group" [ngClass]="{'has-error': registerForm.get('birthdate').errors && registerForm.get('birthdate').touched}">
               <input type="text" class="form-control" placeholder="Дата рождения" bsDatepicker [bsConfig]="bsConfig" formControlName="birthdate">
               <span class="help-block" *ngIf="registerForm.get('birthdate').hasError('required') && registerForm.get('birthdate').touched">
                 Введите дату рождения
               </span>
             </div>
+  
+            <div class="form-group">
+                <select class="form-control" id="departments" name="department" formControlName="departmentId">
+                  <option [ngValue]="null">Отделение</option>
+                  <option *ngFor="let item of sharedDepartmentsList" [value]="item?.id">
+                    {{item?.name}}
+                  </option>
+                </select>
+              </div>
+  
+            <div class="form-group">
+              <select class="form-control" id="positions" name="positions" formControlName="positionId">
+                <option class="form-control" [ngValue]="null">Врач</option>
+                <option *ngFor="let item of sharedPositionsList" [value]="item?.id">
+                  {{item?.name}}
+                </option>
+              </select>
+            </div>  
           
             <div class="form-group" [ngClass]="{'has-error': registerForm.get('password').errors && registerForm.get('password').touched}">
               <input type="password" class="form-control" placeholder="Пароль" formControlName="password">
@@ -49,7 +67,7 @@
                 Пароль должен содержать более 4 знаков
               </span>
             </div>
-        
+          
             <div class="form-group" [ngClass]="{'has-error': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched ||
              registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}">
               <input type="password" class="form-control" placeholder="Подтвердите пароль" formControlName="confirmPassword">
@@ -64,9 +82,9 @@
           
             <div class="form-group text-center">
               <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Зарегистрировать</button>
-              <!-- <button class="btn btn-default" type="button" (click)="cancel()">Отмена</button> -->
             </div>
           </form>
     </div>
   </div>
-
+  
+  

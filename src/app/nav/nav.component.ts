@@ -16,12 +16,11 @@ export class NavComponent implements OnInit {
   constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    // console.log('nav init');
     this.userLoggedIn = this.authService.userLoggedIn;
     if(localStorage.getItem('Token'))
-      this.userForLogin  = 'nobody';
+      this.authService.userForLogin  = 'nobody';
     else
-      this.userForLogin  = 'patient';
+      this.authService.userForLogin  = 'patient';
   }
   
   Login(user){
@@ -39,15 +38,13 @@ export class NavComponent implements OnInit {
 
         else if(user == "admin")
           this.router.navigate(['/admin/staffs']);
-        this.userForLogin = 'nobody';
       });    
-    // console.log(this.userForLogin);
   }
 
   Logout(user){
     this.authService.logout();
     this.userLoggedIn = 'nobody';
-    this.userForLogin = user;
+    this.authService.userForLogin = user;
     this.alertify.success("Вы вышли");
     this.router.navigate(['/home']);    
   }
@@ -76,13 +73,13 @@ export class NavComponent implements OnInit {
 
   //UI functions
   ToggleLoginForm(user){
-    if(this.userForLogin == user)
+    if(this.authService.userForLogin == user)
       return true;
     else
       return false;
   }
 
   ActivateLoginForm(user){
-    this.userForLogin = user;
+    this.authService.userForLogin = user;
   }
 }

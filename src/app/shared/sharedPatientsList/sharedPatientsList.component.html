@@ -6,6 +6,7 @@
         <label for="name">ФИО</label>
         <input type="string" class="form-control" style="width: 270px" id="name" name="name" (keyup)="loadPatients()" [(ngModel)]="userParams.name">
       </div>
+      <button *ngIf="LoggedIn('admin')" type="button" class="btn btn-info" style="margin-left:10px" (click)="PatientRegister()">Новый пациент</button>
     </form>
   </div>
   <br>  

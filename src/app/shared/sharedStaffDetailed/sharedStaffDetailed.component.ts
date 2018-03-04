@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-sharedStaffDetailed',
@@ -13,7 +14,8 @@ export class SharedStaffDetailedComponent implements OnInit {
 
   constructor(
     private alertify: AlertifyService, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -22,5 +24,4 @@ export class SharedStaffDetailedComponent implements OnInit {
         this.alertify.error(error);
       });
   }
-
 }

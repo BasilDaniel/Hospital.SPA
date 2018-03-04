@@ -52,6 +52,12 @@ import { SharedAppointmentDetailedResolver } from './_resolvers/sharedAppointmen
 import { SharedDepartmentDetailedResolver } from './_resolvers/sharedDepartmentDetailed.resolver';
 import { SharedDiseaseDetailedResolver } from './_resolvers/sharedDiseaseDetailed.resolver';
 import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetailed.resolver';
+import { StaffHomeComponent } from './home/staffHome/staffHome.component';
+import { AdminHomeComponent } from './home/adminHome/adminHome.component';
+import { AdminRegisterComponent } from './adminRegister/adminRegister.component';
+import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.resolver';
+import { AppointmentService } from './_services/appointment.service';
+import { PatientAppointmentsListComponent } from './patient/patientAppointmentsList/patientAppointmentsList.component';
 
 
 @NgModule({
@@ -62,10 +68,12 @@ import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetai
     HomeComponent,
     StaffRegisterComponent,
     PatientRegisterComponent,
+    AdminRegisterComponent,
     AdminDetailedComponent,
     AdminsListComponent,
     PatientDetailedComponent,
     PatientStaffDetailedComponent,
+    PatientAppointmentsListComponent,
     SharedStaffsListComponent,
     SharedStaffDetailedComponent,
     SharedPatientsListComponent,
@@ -77,7 +85,10 @@ import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetai
     SharedDiseasesListComponent,
     SharedDiseaseDetailedComponent,
     SharedPositionsListComponent,
-    SharedPositionDetailedComponent
+    SharedPositionDetailedComponent,
+    StaffHomeComponent,
+    AdminHomeComponent,
+    AdminRegisterComponent
 ],
   imports: [
     BrowserModule,
@@ -100,6 +111,7 @@ import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetai
     StaffService,
     SharedService,
     AdminService,
+    AppointmentService,
     PatientDetailedResolver,
     SharedStaffsListResolver,
     SharedPatientsListResolver,
@@ -114,7 +126,8 @@ import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetai
     SharedAppointmentDetailedResolver,
     SharedDepartmentDetailedResolver,
     SharedDiseaseDetailedResolver,
-    SharedPositionDetailedResolver
+    SharedPositionDetailedResolver,
+    PatientStaffDetailedResolver
   ],
   bootstrap: [AppComponent]
 })

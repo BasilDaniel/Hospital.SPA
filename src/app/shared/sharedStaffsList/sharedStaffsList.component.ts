@@ -22,6 +22,7 @@ export class SharedStaffsListComponent implements OnInit {
   userParams: any = {};
   sharedDepartmentsList: SharedDepartmentsList[];
   sharedPositionsList: SharedPositionsList[];
+  userLoggedIn: any;
 
   constructor( 
     private authService: AuthService,
@@ -83,6 +84,33 @@ export class SharedStaffsListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadStaffs();
+  }
+  
+
+  LoggedIn(user){
+    this.userLoggedIn = this.authService.userLoggedIn;
+    var verifyUser: boolean;
+    if(user == this.userLoggedIn){
+      verifyUser = true;
+    }
+    else{
+      verifyUser = false;
+    }
+
+    if(this.authService.loggedIn(user) && user == this.userLoggedIn)
+    {
+      // console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
+      return true;
+    }
+    else
+    {
+      // console.log('authService.loggedIn ' + this.authService.loggedIn(user) + '  user ' + verifyUser + '  user ' + user);
+      return false;
+    }          
+  }
+
+  StaffRegister(){
+    this.router.navigate(['/admin/staffRegister']);
   }
 
 }

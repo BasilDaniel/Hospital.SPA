@@ -39,4 +39,8 @@ export class AdminsListComponent implements OnInit {
     let path = '/' + this.authService.userLoggedIn + '/admin';
     this.router.navigate([path, id]);
   }
+
+  AdminRegister(){
+    this.router.navigate(['/admin/adminRegister']);
+  }
 }

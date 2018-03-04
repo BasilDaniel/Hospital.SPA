@@ -45,12 +45,12 @@
         <li class="dropdown" dropdown>
             <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудникам<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
-            <li routerLinkActive="active"><a (click)="ActivateLoginForm('staff')">Для врачей</a></li>
+            <li routerLinkActive="active"><a (click)="ActivateLoginForm('staff')" [routerLink]="['/staffHome']">Для врачей</a></li>
             <li role="separator" class="divider"></li>
-            <li routerLinkActive="active"><a (click)="ActivateLoginForm('admin')">Для регистратуры </a></li>
+            <li routerLinkActive="active"><a (click)="ActivateLoginForm('admin')" [routerLink]="['/adminHome']">Для регистратуры </a></li>
           </ul>
         </li>
-        <li routerLinkActive="active"><a (click)="ActivateLoginForm('patient')">Пациентам</a></li>
+        <li routerLinkActive="active"><a (click)="ActivateLoginForm('patient')" [routerLink]="['/home']">Пациентам</a></li>
       </ul>
 
       <!-- Patientlogin form  -->
@@ -61,7 +61,7 @@
           <div class="form-group">
             <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
           </div>
-          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти patient</button>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти</button>
         </form>
 
       <!-- StaffLogin form -->
@@ -72,7 +72,7 @@
         <div class="form-group">
           <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
         </div>
-        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти staff</button>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти</button>
       </form>
 
       <!-- AdminLogin form -->
@@ -83,7 +83,7 @@
           <div class="form-group">
             <input type="password" placeholder="Пароль" class="form-control" required name="password" [(ngModel)]="model.password">
           </div>
-          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти admin</button>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Войти</button>
         </form>
 
       <!-- Staff dropdown menu -->

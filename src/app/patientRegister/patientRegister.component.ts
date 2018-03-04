@@ -51,17 +51,27 @@ export class PatientRegisterComponent implements OnInit {
   }
 
   PatientRegister() {
-    // const user = 'patient';
-    // this.authService.register(this.patientModel, user).subscribe(() => {
-    //   this.alertify.success('Вы зарегистрированы');
-    // }, error => {
-    //   this.alertify.error(error);
-    // }, () => {
-    //   this.authService.login(this.patientModel, user).subscribe(() => {
-    //     this.authService.userLoggedIn = user;
-    //     this.router.navigate(['/patient/patient']);
-    //   });      
-    // });
+    if (this.registerForm.valid){
+      const user = this.authService.userLoggedIn + '/patient';
+      this.patientModel = Object.assign({}, this.registerForm.value);
+      this.authService.register(this.patientModel, user).subscribe(() => {
+      this.alertify.success('Пациент зарегистрирован');
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        if(this.authService.userLoggedIn == 'nobody'){
+          console.log(this.authService.userLoggedIn);
+          this.authService.login(this.patientModel, 'patient').subscribe(() => {
+          this.alertify.success("Вы вошли в систему");
+          this.router.navigate(['/patient/patient', this.authService.userId]);
+          });
+        }
+        else
+        this.router.navigate(['/admin/patients']);
+               
+      });
+    }
+    
   }
 
   cancel() {

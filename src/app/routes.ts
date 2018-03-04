@@ -33,9 +33,18 @@ import { SharedAppointmentDetailedResolver } from './_resolvers/sharedAppointmen
 import { SharedDepartmentDetailedResolver } from './_resolvers/sharedDepartmentDetailed.resolver';
 import { SharedDiseaseDetailedResolver } from './_resolvers/sharedDiseaseDetailed.resolver';
 import { SharedPositionDetailedResolver } from './_resolvers/sharedPositionDetailed.resolver';
+import { StaffHomeComponent } from './home/staffHome/staffHome.component';
+import { AdminHomeComponent } from './home/adminHome/adminHome.component';
+import { StaffRegisterComponent } from './staffRegister/staffRegister.component';
+import { AdminRegisterComponent } from './adminRegister/adminRegister.component';
+import { PatientRegisterComponent } from './patientRegister/patientRegister.component';
+import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.resolver';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
+    { path: 'staffHome', component: StaffHomeComponent},
+    { path: 'adminHome', component: AdminHomeComponent},
+    { path: 'patientRegister', component: PatientRegisterComponent},
     //Patients routes
     {  
         path: '',
@@ -43,7 +52,7 @@ export const appRoutes: Routes = [
         canActivate: [PatientAuthGuard],
         children: [
             { path: 'patient/patient/:id', component: PatientDetailedComponent, resolve: {user: PatientDetailedResolver}},
-            { path: 'patient/staff/:id', component: PatientStaffDetailedComponent},
+            { path: 'patient/staff/:id', component: PatientStaffDetailedComponent, resolve: {users: PatientStaffDetailedResolver}},
             { path: 'patient/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}}
         ]
     },
@@ -81,7 +90,10 @@ export const appRoutes: Routes = [
             { path: 'admin/disease/:id', component: SharedDiseaseDetailedComponent, resolve:{users: SharedDiseaseDetailedResolver}},
             { path: 'admin/diseases', component: SharedDiseasesListComponent, resolve:{users: SharedDiseasesListResolver}},
             { path: 'admin/position/:id', component: SharedPositionDetailedComponent, resolve:{users: SharedPositionDetailedResolver}},
-            { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharedPositionsListResolver}}            
+            { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharedPositionsListResolver}},
+            { path: 'admin/staffRegister', component: StaffRegisterComponent},
+            { path: 'admin/adminRegister', component: AdminRegisterComponent},
+            { path: 'admin/patientRegister', component: PatientRegisterComponent}            
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full'},

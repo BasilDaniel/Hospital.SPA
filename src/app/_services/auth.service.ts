@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper, AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +12,7 @@ export class AuthService {
     patientAuthUrl = 'http://localhost:5000/api/AuthPatient/';
     adminAuthUrl = 'http://localhost:5000/api/AuthAdmin/';
     Token: any;
+    userForLogin: string;
     userLoggedIn: string = 'nobody';
     userId: number = null;
     decodedToken: any;
@@ -19,7 +20,7 @@ export class AuthService {
 
     
 
-constructor(private http: Http) { }
+constructor(private http: Http, private authHttp: AuthHttp) { }
 
 
     //Login user
@@ -32,6 +33,7 @@ constructor(private http: Http) { }
                     this.decodedToken = this.jwtHelper.decodeToken(staff.tokenString);
                     this.Token = staff.tokenString;
                     this.userLoggedIn = user;
+                    this.userForLogin = 'nobody';
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);
@@ -44,6 +46,7 @@ constructor(private http: Http) { }
                     this.decodedToken = this.jwtHelper.decodeToken(patient.tokenString);
                     this.Token = patient.tokenString;
                     this.userLoggedIn = user;
+                    this.userForLogin = 'nobody';
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);
@@ -56,6 +59,7 @@ constructor(private http: Http) { }
                     this.decodedToken = this.jwtHelper.decodeToken(admin.tokenString);
                     this.Token = admin.tokenString;
                     this.userLoggedIn = user;
+                    this.userForLogin = 'nobody';
                     this.userId = this.decodedToken.nameid;
                 }
             }).catch(this.handleError);
@@ -63,9 +67,13 @@ constructor(private http: Http) { }
     }
 
     register(model: any, user: any) {
-        if(user == 'staff')
-            return this.http.post(this.staffAuthUrl + 'register', model, this.requestOptions()).catch(this.handleError);
-        else if(user == 'patient')
+        if(user == 'admin/admin')
+            return this.authHttp.post(this.adminAuthUrl + 'registerAdmin', model, this.requestOptions()).catch(this.handleError);
+        else if(user == 'admin/staff')
+            return this.authHttp.post(this.adminAuthUrl + 'registerStaff', model, this.requestOptions()).catch(this.handleError);
+        else if(user == 'admin/patient')
+            return this.authHttp.post(this.adminAuthUrl + 'registerPatient', model, this.requestOptions()).catch(this.handleError);
+        else if(user == 'nobody/patient')
             return this.http.post(this.patientAuthUrl + 'register', model, this.requestOptions()).catch(this.handleError);
     }
 

@@ -24,7 +24,6 @@ export class SharedService {
 
 constructor(private authHttp: AuthHttp, private authService: AuthService) { }
     getBaseUrl() {//have to be changed to more scalable unit
-        console.log(this.authService.userLoggedIn);
         if (this.authService.userLoggedIn === 'patient')
             return environment.apiPatientUrl;
 
