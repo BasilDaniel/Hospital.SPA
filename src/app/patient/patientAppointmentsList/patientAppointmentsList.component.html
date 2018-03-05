@@ -1,3 +1,12 @@
-<p>
-  patientAppointmentsList works!
-</p>
+
+  <div class="container filter-conteiner">
+      <div class="row">
+        <form class="form-inline" #form="ngForm" (ngSubmit)="loadAppointments()" novalidate>
+          <div class="form-group">
+              <input type="text" placeholder="Выберите дату" class="form-control" #dp="bsDatepicker"
+              bsDatepicker [(bsValue)]="userParams.dateTime">
+          </div>    
+          <button type="button" class="btn btn-info" style="margin-left:10px" (click)="loadAppointments()">Найти</button>
+        </form>
+      </div> 
+    </div>

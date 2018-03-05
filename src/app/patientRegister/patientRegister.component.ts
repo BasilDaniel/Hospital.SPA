@@ -60,7 +60,6 @@ export class PatientRegisterComponent implements OnInit {
         this.alertify.error(error);
       }, () => {
         if(this.authService.userLoggedIn == 'nobody'){
-          console.log(this.authService.userLoggedIn);
           this.authService.login(this.patientModel, 'patient').subscribe(() => {
           this.alertify.success("Вы вошли в систему");
           this.router.navigate(['/patient/patient', this.authService.userId]);
