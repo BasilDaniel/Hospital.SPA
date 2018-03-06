@@ -118,7 +118,7 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
             '&department=' + userParams.department +
             '&position=' + userParams.position;
         }
-
+        console.log(queryString);
         return this.authHttp
         .get(this.getBaseUrl() + 'appointments' + queryString.toLowerCase())
         .map((response: Response) => {

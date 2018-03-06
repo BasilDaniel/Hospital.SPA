@@ -1,3 +1,12 @@
 .filter-conteiner{
     max-width: 305px;
 }
+.table-aligment{
+    max-width: 30%;
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+td{
+    cursor: pointer;
+}

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
@@ -7,6 +8,7 @@ import { PaginatedResult, Pagination } from '../_models/pagination';
 import { Observable } from 'rxjs/Observable';
 import { SharedService } from './shared.service';
 import { AlertifyService } from './alertify.service';
+import { SharedAppointmentsList } from '../_models/SharedAppointmentsList';
 
 @Injectable()
 export class AppointmentService {
@@ -58,15 +60,35 @@ getBaseUrl() {//have to be changed to more scalable unit
         return environment.apiAdminUrl;
 }
 
-getAppointments() {
-    this.sharedService.getAppointmentsList(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
-      .subscribe((res: PaginatedResult<PatientAppointmentsList[]>) => {
-        this.patientAppointmentsList = res.result;
-        this.pagination = res.pagination;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
+getAppointmentsList(page?: number, itemsPerPage?: number, userParams?: any){
+    const paginatedResult: PaginatedResult<PatientAppointmentsList[]> = new PaginatedResult<PatientAppointmentsList[]>();
+    let queryString = '?';
+
+    if (page != null && itemsPerPage != null) {
+        queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+    }
+
+    if(userParams != null){
+        // console.log(userParams);
+        queryString += 
+        'dateTime=' + userParams.dateTime +
+        '&staffId=' + userParams.staffId;
+    }
+    // console.log(queryString);
+    return this.authHttp
+    .get(this.getBaseUrl() + 'appointments' + queryString.toLowerCase())
+    .map((response: Response) => {
+        paginatedResult.result = response.json();
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(
+            response.headers.get('Pagination')
+          );
+        }
+
+        return paginatedResult;
+      })
+    .catch(this.handleError);
+}
 
 private handleError(error: any){
     const applicationError = error.headers.get('Application-error');

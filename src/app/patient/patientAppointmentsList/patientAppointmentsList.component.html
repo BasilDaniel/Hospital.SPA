@@ -1,12 +1,32 @@
 
   <div class="container filter-conteiner">
       <div class="row">
-        <form class="form-inline" #form="ngForm" (ngSubmit)="loadAppointments()" novalidate>
+        <form class="form-inline" #form="ngForm" novalidate>
           <div class="form-group">
               <input type="text" placeholder="Выберите дату" class="form-control" #dp="bsDatepicker"
-              bsDatepicker [(bsValue)]="userParams.dateTime">
+              bsDatepicker [(bsValue)]="dateTime"
+              [bsConfig]="bsConfig">
           </div>    
-          <button type="button" class="btn btn-info" style="margin-left:10px" (click)="loadAppointments()">Найти</button>
+          <button type="button" class="btn btn-info" style="margin-left:10px" (click)="loadDailyAppointments()">Найти</button>
         </form>
       </div> 
     </div>
+
+  <br> 
+
+    <table class="table table-hover table-bordered table-container table-aligment">
+      <thead>
+          <tr>
+              <th>Дата</th>
+              <th>Время</th>
+              <th>Прием</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of appointmentListToDisplay">
+              <td title="Взять номерок">{{item.dateTime | date:'dd.MM.yy'}}</td>
+              <td title="Взять номерок">{{item.dateTime | date:'HH:mm'}}</td>
+              <td title="Взять номерок">{{item.isOpen}}</td>
+          </tr>        
+      </tbody>
+    </table>
