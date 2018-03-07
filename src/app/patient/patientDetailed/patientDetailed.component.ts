@@ -23,6 +23,8 @@ export class PatientDetailedComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.patientDetailed = data['user'];
+      
+      console.log(this.patientDetailed);
       }, error => {
         this.alertify.error(error);
       });

@@ -16,6 +16,7 @@ export class AppointmentService {
     userParams: any = {};  
     pagination: Pagination;
     workingHours: DateTimeFormat; 
+    appointmentToCreateData: any;
     appointmentDurations = [
         {
           "placeholder": "5 минут",
@@ -88,6 +89,15 @@ getAppointmentsList(page?: number, itemsPerPage?: number, userParams?: any){
         return paginatedResult;
       })
     .catch(this.handleError);
+}
+
+register(model: any) {
+    return this.authHttp.post(this.getBaseUrl() + 'createAppointment', model, this.requestOptions()).catch(this.handleError);
+}
+
+private requestOptions() {
+    const headers = new Headers({ 'Content-type': 'application/json' });
+    return new RequestOptions({ headers: headers });
 }
 
 private handleError(error: any){

@@ -39,6 +39,7 @@ import { StaffRegisterComponent } from './staffRegister/staffRegister.component'
 import { AdminRegisterComponent } from './adminRegister/adminRegister.component';
 import { PatientRegisterComponent } from './patientRegister/patientRegister.component';
 import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.resolver';
+import { AppointmentRegisterComponent } from './appointmentRegister/appointmentRegister.component';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -53,7 +54,8 @@ export const appRoutes: Routes = [
         children: [
             { path: 'patient/patient/:id', component: PatientDetailedComponent, resolve: {user: PatientDetailedResolver}},
             { path: 'patient/staff/:id', component: PatientStaffDetailedComponent, resolve: {users: PatientStaffDetailedResolver}},
-            { path: 'patient/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}}
+            { path: 'patient/staffs', component: SharedStaffsListComponent, resolve:{users: SharedStaffsListResolver}},
+            { path: 'patient/appointmentRegister', component: AppointmentRegisterComponent}
         ]
     },
     //Staff routes

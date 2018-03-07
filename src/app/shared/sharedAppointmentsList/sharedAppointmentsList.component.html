@@ -1,15 +1,18 @@
 <div class="container filter-conteiner">
 
   <div class="row">
-    <form class="form-inline" #form="ngForm" (ngSubmit)="loadAppointments()" novalidate>
+    <form class="form-inline" #form="ngForm"novalidate>
       <div class="form-group">
-        <label for="name">Дата</label>
-        <input type="date" class="form-control" style="width: 270px" id="name" name="name" (change)="loadAppointments()" [(ngModel)]="userParams.dateTime">
+        <input type="text" placeholder="Выберите дату" class="form-control" #dp="bsDatepicker" 
+              bsDatepicker [(bsValue)]="dateTime" (bsValueChange)="getAppointmentsWithParams($event)"
+              [bsConfig]="bsConfig">
+        <!-- <input type="date" class="form-control" style="width: 270px" id="name" name="name" (change)="loadAppointments()" [(ngModel)]="userParams.dateTime"> -->
       </div>
 
       <div class="form-group">
         <label for="departments">Отделения: </label>
-        <select class="form-control" style="width: 170px" id="departments" name="departments" (change)="loadAppointments()" [(ngModel)]="userParams.department">
+        <select class="form-control" style="width: 170px" id="departments" name="departments" (change)="getAppointmentsWithParams()" [(ngModel)]="department">
+          <option disabled selected>Отделения</option>
           <option *ngFor="let item of sharedDepartmentsList" [value]="item?.name">
             {{item?.name}}
           </option>
@@ -18,7 +21,7 @@
 
       <div class="form-group">
         <label for="positions">Врачи: </label>
-        <select class="form-control" style="width: 170px" id="positions" name="positions" (change)="loadAppointments()" [(ngModel)]="userParams.position">
+        <select class="form-control" style="width: 170px" id="positions" name="positions" (change)="getAppointmentsWithParams()" [(ngModel)]="position">
           <option *ngFor="let item of sharedPositionsList" [value]="item?.name">
             {{item?.name}}
           </option>

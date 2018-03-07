@@ -8,6 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDepartmentsList } from '../../_models/SharedDepartmentsList';
 import { AuthService } from '../../_services/auth.service';
 import { DatePipe } from '@angular/common';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ruLocale } from 'ngx-bootstrap/locale';
 
 @Component({
   selector: 'app-sharedAppointmentsList',
@@ -15,20 +18,33 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./sharedAppointmentsList.component.css']
 })
 export class SharedAppointmentsListComponent implements OnInit {
+  dateTime: Date;
+  department = '';
+  position = '';
   sharedAppointmentsList: SharedAppointmentsList[];
   pagination: Pagination;  
   userParams: any = {};
   sharedDepartmentsList: SharedDepartmentsList[];
   sharedPositionsList: SharedPositionsList[];
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor( 
     private authService: AuthService,
     private router: Router,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _localeService: BsLocaleService) { }
 
   ngOnInit() {
+    defineLocale('ru', ruLocale);
+    this._localeService.use('ru');
+    this.bsConfig = {
+      containerClass: 'theme-green',
+      showWeekNumbers: false,
+      dateInputFormat: "DD-MM-YYYY"
+    };
+
     this.route.data.subscribe(data => {
       this.sharedAppointmentsList = data['users'].result;
       this.pagination = data['users'].pagination;
@@ -38,10 +54,6 @@ export class SharedAppointmentsListComponent implements OnInit {
     
     this.loadDepartments();
     this.loadPositions();
-
-    this.userParams.dateTime = '';
-    this.userParams.department = '';
-    this.userParams.position = '';
   }
 
   linkToUser(id){
@@ -67,6 +79,17 @@ export class SharedAppointmentsListComponent implements OnInit {
     })  
   }
 
+  getAppointmentsWithParams(){       
+    this.userParams.dateTime = this.dateTime;
+
+    if(this.dateTime != null)
+    this.userParams.dateTime= this.userParams.dateTime.toISOString();
+
+    this.userParams.department = this.department;
+    this.userParams.position = this.position;
+    this.loadAppointments()
+  }
+
   loadAppointments() {
     this.sharedService.getAppointmentsList(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<SharedAppointmentsList[]>) => {
@@ -76,11 +99,14 @@ export class SharedAppointmentsListComponent implements OnInit {
         this.alertify.error(error);
       });
   }
-
   resetFilters() {
-    this.userParams.dateTime = '';
+    this.userParams.dateTime = null;
     this.userParams.department = '';
     this.userParams.position = '';
+    
+    this.dateTime = null;
+    this.department = '';
+    this.position = '';
     this.loadAppointments();
   }
 

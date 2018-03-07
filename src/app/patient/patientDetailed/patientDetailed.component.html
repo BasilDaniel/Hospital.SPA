@@ -40,7 +40,8 @@
   <table class="table table-hover table-bordered table-container  table-aligment">
     <thead>
         <tr>
-            <th>Дата и время</th>
+            <th>Дата</th>
+            <th>Время</th>
             <th>Отделение</th>
             <th>Врач</th>
             <th>Фамилия</th>
@@ -50,7 +51,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of patientDetailed.appointments">
-            <td>{{item.dateTime}}</td>
+            <td>{{item.dateTime | date:'dd.MM.yy'}}</td>
+            <td>{{item.dateTime | date:'HH:mm'}}</td>
             <td>{{item.staff.department.name}}</td>
             <td>{{item.staff.position.name}}</td>
             <td>{{item.staff.familyName}}</td>

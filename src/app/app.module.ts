@@ -58,6 +58,7 @@ import { AdminRegisterComponent } from './adminRegister/adminRegister.component'
 import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.resolver';
 import { AppointmentService } from './_services/appointment.service';
 import { PatientAppointmentsListComponent } from './patient/patientAppointmentsList/patientAppointmentsList.component';
+import { AppointmentRegisterComponent } from './appointmentRegister/appointmentRegister.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { PatientAppointmentsListComponent } from './patient/patientAppointmentsL
     SharedPositionDetailedComponent,
     StaffHomeComponent,
     AdminHomeComponent,
-    AdminRegisterComponent
+    AdminRegisterComponent,
+    AppointmentRegisterComponent
 ],
   imports: [
     BrowserModule,

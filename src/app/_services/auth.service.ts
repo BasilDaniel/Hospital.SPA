@@ -48,6 +48,7 @@ constructor(private http: Http, private authHttp: AuthHttp) { }
                     this.userLoggedIn = user;
                     this.userForLogin = 'nobody';
                     this.userId = this.decodedToken.nameid;
+                    console.log(this.userId);
                 }
             }).catch(this.handleError);
         }

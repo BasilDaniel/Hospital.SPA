@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { PatientAppointmentsList } from '../../_models/PatientAppointmentsList';
 import { Pagination, PaginatedResult } from '../../_models/pagination';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -12,6 +13,7 @@ import { DateFormatter } from 'ngx-bootstrap/datepicker/date-formatter';
 import { DateFormatterFn } from 'ngx-bootstrap/chronos/types';
 import { Time } from '@angular/common/src/i18n/locale_data_api';
 import { forEach } from '@angular/router/src/utils/collection';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-patientAppointmentsList',
@@ -29,9 +31,11 @@ export class PatientAppointmentsListComponent implements OnInit {
   dateTime: Date;
 
   constructor( 
+    private router: Router,
     private _localeService: BsLocaleService,
     private appointmentService: AppointmentService,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.userParams.dateTime = '';
@@ -54,7 +58,7 @@ export class PatientAppointmentsListComponent implements OnInit {
         this.pagination = res.pagination;
         // console.log(this.patientAppointmentsList);
         this.appointmentListToDisplay = this.dayModelCreate();
-        console.log(this.appointmentListToDisplay);
+        // console.log(this.appointmentListToDisplay);
       }, error => {
         this.alertify.error(error);
       });    
@@ -79,22 +83,26 @@ export class PatientAppointmentsListComponent implements OnInit {
         hour: any;
         minutes: any;
         isOpen: string;
-        constructor(year, month, day, hour, minutes, isOpen: string) {
+        isOpenBoolean: boolean
+        constructor(year, month, day, hour, minutes, isOpen: string, isOpenBoolean: boolean) {
             this.year = year;
             this.month = month;
             this.day = day;
             this.hour = hour;
             this.minutes = minutes;
             this.isOpen = isOpen;
+            this.isOpenBoolean = isOpenBoolean;
         }
       } 
       
       class DayAppointmentToDisplay {
         dateTime: any;
         isOpen: string;
-        constructor(dateTime, isOpen: string) {
+        isOpenBoolean: boolean
+        constructor(dateTime, isOpen: string, isOpenBoolean: boolean) {
             this.dateTime = dateTime;
             this.isOpen = isOpen;
+            this.isOpenBoolean = isOpenBoolean;
         }
       }
 
@@ -107,11 +115,13 @@ export class PatientAppointmentsListComponent implements OnInit {
             timeCounter.getDate(),
             timeCounter.getHours(), 
             timeCounter.getMinutes(),
-            'Занято');
+            'Занято',
+            false);
 
         if(timeCounter.getHours() < workingHourBreakStart || timeCounter.getHours() >= workingHourBreakEnd){
           // console.log('ПРИЕМ ' + timeCounter);
           dayAppointment.isOpen = 'Свободно';
+          dayAppointment.isOpenBoolean = true;
           for(let patientAppointment of this.patientAppointmentsList){
             let date = new Date(Date.parse(patientAppointment.dateTime));
 
@@ -119,6 +129,7 @@ export class PatientAppointmentsListComponent implements OnInit {
             date.getMinutes() == timeCounter.getMinutes())
             {
               dayAppointment.isOpen = 'Занято';
+              dayAppointment.isOpenBoolean = false;
             }
           }
           
@@ -144,13 +155,59 @@ export class PatientAppointmentsListComponent implements OnInit {
         )
 
         let isOpen = dayModel[i].isOpen;
+        let isOpenBoolean = dayModel[i].isOpenBoolean;
 
-        let appointment = new DayAppointmentToDisplay(dateTime, isOpen)
+        let appointment = new DayAppointmentToDisplay(dateTime.toLocaleString(), isOpen, isOpenBoolean)
 
         dayModelToReturn.push(appointment);
       }
       
     return dayModelToReturn;
+  }
+
+  createAppointment(dateTime, isOpenBoolean){
+
+    class AppointmentToCreateData {
+      dateTime: any;
+      staffFamilyName: string;
+      staffName: string;
+      staffMiddleName: string;
+      staffId: number;
+      patientId: number;
+      staffDepartment: string;
+      staffPosition: string;
+
+      constructor(dateTime, staffFamilyName, staffName, staffMiddleName, staffDepartment, staffPosition, staffId, patientId) {
+          this.dateTime = dateTime;
+          this.staffFamilyName = staffFamilyName;
+          this.staffName = staffName;
+          this.staffMiddleName = staffMiddleName;
+          this.staffId = staffId;
+          this.patientId = patientId;
+          this.staffDepartment = staffDepartment;
+          this.staffPosition = staffPosition;
+      }
+    }
+    if(isOpenBoolean == true){
+      this.appointmentService.appointmentToCreateData = 
+      new AppointmentToCreateData(
+        dateTime, 
+        this.patientStaffDetailed.familyName, 
+        this.patientStaffDetailed.name,
+        this.patientStaffDetailed.middleName,
+        this.patientStaffDetailed.department.name,
+        this.patientStaffDetailed.position.name,
+        this.patientStaffDetailed.id,
+        this.authService.userId,);
+
+      this.router.navigate(['/patient/appointmentRegister']);
+      console.log(this.appointmentService.appointmentToCreateData)
+    }
+    else{
+      console.log('appointment NOT created')
+    }
+    // let appointmentToCreateData = new AppointmentToCreateData();
+    // console.log('appointment created ' + dateTime)
   }
 
 }
