@@ -112,7 +112,7 @@ export class SharedAppointmentsListComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadAppointments();
+    this.getAppointmentsWithParams();
   }
 
 }

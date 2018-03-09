@@ -15,7 +15,7 @@
           <td>{{patientDetailed.familyName}}</td>
           <td>{{patientDetailed.name}}</td>
           <td>{{patientDetailed.middleName}}</td>
-          <td>{{patientDetailed.birthdate}}</td>
+          <td>{{patientDetailed.birthdate | date:'dd.MM.yy'}}</td>
       </tr>        
   </tbody>
 </table>
@@ -31,8 +31,8 @@
     <tbody>
         <tr *ngFor="let item of patientDetailed.patientDiseases">
             <td>{{item.disease.name}}</td>
-            <td>{{item.diagnosed}}</td>
-            <td>{{item.cured}}</td>
+            <td>{{item.diagnosed | date:'dd.MM.yy'}}</td>
+            <td>{{item.cured | date:'dd.MM.yy'}}</td>
         </tr>        
     </tbody>
   </table>

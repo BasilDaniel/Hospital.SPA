@@ -3,8 +3,7 @@
   <div class="row">
     <form class="form-inline" #form="ngForm" (ngSubmit)="loadPatients()" novalidate>
       <div class="form-group">
-        <label for="name">ФИО</label>
-        <input type="string" class="form-control" style="width: 270px" id="name" name="name" (keyup)="loadPatients()" [(ngModel)]="userParams.name">
+        <input type="string" class="form-control" placeholder="Для поиска введите ФИО пациента" style="width: 276px" id="name" name="name" (keyup)="loadPatients()" [(ngModel)]="userParams.name">
       </div>
       <button *ngIf="LoggedIn('admin')" type="button" class="btn btn-info" style="margin-left:10px" (click)="PatientRegister()">Новый пациент</button>
     </form>
