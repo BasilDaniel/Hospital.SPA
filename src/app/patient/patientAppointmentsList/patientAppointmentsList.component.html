@@ -23,7 +23,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr class="hovered" [style.background-color]="item.isOpenBoolean==true?'#a5e1a5':'#fbc6c7'" *ngFor="let item of appointmentListToDisplay"(click)="createAppointment(item.dateTime, item.isOpenBoolean)">
+          <tr class="hovered" [style.background-color]="item.isOpenBoolean==true?'#a5e1a5':'#fbc6c7'" *ngFor="let item of appointmentListToDisplay"(click)="createAppointment(item)">
               <td title="Взять номерок">{{item.dateTime | date:'dd.MM.yy'}}</td>
               <td title="Взять номерок">{{item.dateTime | date:'HH:mm'}}</td>
               <td title="Взять номерок">{{item.isOpen}}</td>

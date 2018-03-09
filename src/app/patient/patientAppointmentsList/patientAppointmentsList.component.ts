@@ -96,7 +96,7 @@ export class PatientAppointmentsListComponent implements OnInit {
       } 
       
       class DayAppointmentToDisplay {
-        dateTime: any;
+        dateTime: Date;
         isOpen: string;
         isOpenBoolean: boolean
         constructor(dateTime, isOpen: string, isOpenBoolean: boolean) {
@@ -157,18 +157,26 @@ export class PatientAppointmentsListComponent implements OnInit {
         let isOpen = dayModel[i].isOpen;
         let isOpenBoolean = dayModel[i].isOpenBoolean;
 
-        let appointment = new DayAppointmentToDisplay(dateTime.toLocaleString(), isOpen, isOpenBoolean)
+        let appointment = new DayAppointmentToDisplay(dateTime, isOpen, isOpenBoolean)
 
         dayModelToReturn.push(appointment);
       }
+    console.log(dayModelToReturn);
       
     return dayModelToReturn;
   }
 
-  createAppointment(dateTime, isOpenBoolean){
+  createAppointment(item){
+
+    let dateTime = new Date(item.dateTime);
+    let isOpenBoolean = item.isOpenBoolean;
+    // console.log('LocaleString ' + dateTime.toLocaleString());
+    // console.log('UTCString ' + dateTime.toUTCString());
+    // console.log('ISOString ' + dateTime.toISOString());
+    // console.log('String ' + dateTime.toString());
 
     class AppointmentToCreateData {
-      dateTime: any;
+      dateTime;
       staffFamilyName: string;
       staffName: string;
       staffMiddleName: string;
@@ -201,7 +209,7 @@ export class PatientAppointmentsListComponent implements OnInit {
         this.authService.userId,);
 
       this.router.navigate(['/patient/appointmentRegister']);
-      console.log(this.appointmentService.appointmentToCreateData)
+      console.log(this.appointmentService.appointmentToCreateData.dateTime)
     }
     else{
       console.log('appointment NOT created')
