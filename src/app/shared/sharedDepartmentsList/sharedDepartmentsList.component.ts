@@ -33,4 +33,8 @@ export class SharedDepartmentsListComponent implements OnInit {
     this.router.navigate([path, id]);
   }
 
+  departmentRegister(){
+    this.router.navigate(['/admin/departmentRegister']);
+  }
+
 }

@@ -49,6 +49,10 @@ export class SharedDiseasesListComponent implements OnInit {
       });
   }
 
+  diseaseRegister(){
+    this.router.navigate(['/admin/diseaseRegister']);
+  }
+
   resetFilters() {
     this.userParams.name = '';
     this.loadDiseases();

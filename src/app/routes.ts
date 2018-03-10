@@ -40,6 +40,9 @@ import { AdminRegisterComponent } from './adminRegister/adminRegister.component'
 import { PatientRegisterComponent } from './patientRegister/patientRegister.component';
 import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.resolver';
 import { AppointmentRegisterComponent } from './appointmentRegister/appointmentRegister.component';
+import { DepartmentRegisterComponent } from './departmentRegister/departmentRegister.component';
+import { DiseaseRegisterComponent } from './diseaseRegister/diseaseRegister.component';
+import { PositionRegisterComponent } from './positionRegister/positionRegister.component';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -95,7 +98,10 @@ export const appRoutes: Routes = [
             { path: 'admin/positions', component: SharedPositionsListComponent, resolve:{users: SharedPositionsListResolver}},
             { path: 'admin/staffRegister', component: StaffRegisterComponent},
             { path: 'admin/adminRegister', component: AdminRegisterComponent},
-            { path: 'admin/patientRegister', component: PatientRegisterComponent}            
+            { path: 'admin/patientRegister', component: PatientRegisterComponent},
+            { path: 'admin/departmentRegister', component: DepartmentRegisterComponent},
+            { path: 'admin/diseaseRegister', component: DiseaseRegisterComponent},
+            { path: 'admin/positionRegister', component: PositionRegisterComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full'},

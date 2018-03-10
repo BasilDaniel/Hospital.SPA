@@ -16,7 +16,7 @@
         <li class="dropdown" dropdown>
             <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудники<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
-            <li routerLinkActive="active"><a [routerLink]="['/admin/staffs']">Врачи</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/admin/staffs']">Специалисты</a></li>
             <li role="separator" class="divider"></li>
             <li routerLinkActive="active"><a [routerLink]="['/admin/admins']">Администраторы </a></li>
           </ul>
@@ -37,7 +37,7 @@
 
       <!-- PatientNavbar links -->
       <ul class="nav navbar-nav" *ngIf="LoggedIn('patient')">
-          <li routerLinkActive="active"><a [routerLink]="['/patient/staffs']">Отделения и врачи</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['/patient/staffs']">Отделения и специалисты</a></li>
         </ul>
 
       <!-- StaffAdminLogin dropdown menu -->
@@ -45,7 +45,7 @@
         <li class="dropdown" dropdown>
             <a (click)="false" class="dropdown-toggle" dropdownToggle>Сотрудникам<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
-            <li routerLinkActive="active"><a (click)="ActivateLoginForm('staff')" [routerLink]="['/staffHome']">Для врачей</a></li>
+            <li routerLinkActive="active"><a (click)="ActivateLoginForm('staff')" [routerLink]="['/staffHome']">Для специалистов</a></li>
             <li role="separator" class="divider"></li>
             <li routerLinkActive="active"><a (click)="ActivateLoginForm('admin')" [routerLink]="['/adminHome']">Для регистратуры </a></li>
           </ul>

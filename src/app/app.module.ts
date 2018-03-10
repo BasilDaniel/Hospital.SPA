@@ -59,6 +59,9 @@ import { PatientStaffDetailedResolver } from './_resolvers/patientStaffDetailed.
 import { AppointmentService } from './_services/appointment.service';
 import { PatientAppointmentsListComponent } from './patient/patientAppointmentsList/patientAppointmentsList.component';
 import { AppointmentRegisterComponent } from './appointmentRegister/appointmentRegister.component';
+import { DepartmentRegisterComponent } from './departmentRegister/departmentRegister.component';
+import { PositionRegisterComponent } from './positionRegister/positionRegister.component';
+import { DiseaseRegisterComponent } from './diseaseRegister/diseaseRegister.component';
 
 
 @NgModule({
@@ -90,7 +93,14 @@ import { AppointmentRegisterComponent } from './appointmentRegister/appointmentR
     StaffHomeComponent,
     AdminHomeComponent,
     AdminRegisterComponent,
-    AppointmentRegisterComponent
+    AppointmentRegisterComponent,
+    DepartmentRegisterComponent,
+    PositionRegisterComponent,
+    DiseaseRegisterComponent
+,
+    DepartmentRegisterComponent,
+    PositionRegisterComponent,
+    DiseaseRegisterComponent
 ],
   imports: [
     BrowserModule,

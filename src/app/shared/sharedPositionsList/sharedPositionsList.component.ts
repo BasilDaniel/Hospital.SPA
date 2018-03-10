@@ -33,4 +33,8 @@ export class SharedPositionsListComponent implements OnInit {
     this.router.navigate([path, id]);
   }
 
+  positionRegister(){
+    this.router.navigate(['/admin/positionRegister']);
+  }
+
 }

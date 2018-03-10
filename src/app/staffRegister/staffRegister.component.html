@@ -40,31 +40,40 @@
             </span>
           </div>
 
-          <div class="form-group">
-              <select class="form-control" id="departments" name="department" formControlName="departmentId">
+          <div class="form-group" [ngClass]="{'has-error': registerForm.get('departmentId').errors && registerForm.get('departmentId').touched}">
+              <select class="form-control" id="departmentId" name="departmentId" formControlName="departmentId">
                 <option [ngValue]="null">Отделение</option>
                 <option *ngFor="let item of sharedDepartmentsList" [value]="item?.id">
                   {{item?.name}}
                 </option>
               </select>
+              <span class="help-block" *ngIf="registerForm.get('departmentId').hasError('required') && registerForm.get('departmentId').touched">
+                Введите отделение
+              </span>
             </div>
 
-          <div class="form-group">
-            <select class="form-control" id="positions" name="positions" formControlName="positionId">
-              <option class="form-control" [ngValue]="null">Врач</option>
+          <div class="form-group"[ngClass]="{'has-error': registerForm.get('positionId').errors && registerForm.get('positionId').touched}">
+            <select class="form-control" id="positionId" name="positionId" formControlName="positionId">
+              <option class="form-control" [ngValue]="null">Специалист</option>
               <option *ngFor="let item of sharedPositionsList" [value]="item?.id">
                 {{item?.name}}
               </option>
             </select>
+            <span class="help-block" *ngIf="registerForm.get('positionId').hasError('required') && registerForm.get('positionId').touched">
+              Введите специальность
+            </span>
           </div>  
               
-          <div class="form-group">
+          <div class="form-group" [ngClass]="{'has-error': registerForm.get('appointmentDuration').errors && registerForm.get('appointmentDuration').touched}">
               <select class="form-control" id="appointmentDuration" name="appointmentDuration" formControlName="appointmentDuration">
                 <option class="form-control" [ngValue]="null">Длительность приема</option>
                 <option *ngFor="let item of appointmentDurations" [value]="item?.data">
                   {{item?.placeholder}}
                 </option>
               </select>
+              <span class="help-block" *ngIf="registerForm.get('appointmentDuration').hasError('required') && registerForm.get('appointmentDuration').touched">
+                Введите длительность приема
+              </span>  
             </div>
         
           <div class="form-group" [ngClass]="{'has-error': registerForm.get('password').errors && registerForm.get('password').touched}">

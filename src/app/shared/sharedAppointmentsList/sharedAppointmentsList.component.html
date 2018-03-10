@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group">
-        <label for="positions">Врачи: </label>
+        <label for="positions">Специалисты: </label>
         <select class="form-control" style="width: 170px" id="positions" name="positions" (change)="getAppointmentsWithParams()" [(ngModel)]="position">
           <option *ngFor="let item of sharedPositionsList" [value]="item?.name">
             {{item?.name}}
@@ -34,7 +34,7 @@
 </div>
 
 
-<h4 class="text-center">Приемы врачей</h4>
+<h4 class="text-center">Приемы специалистов</h4>
 <table class="table table-hover table-bordered table-container  table-aligment">
   <thead>
       <tr>
@@ -42,7 +42,7 @@
           <th>Время</th>
           <th>Длительность</th>
           <th>Отделения</th>
-          <th>Врач</th>
+          <th>Специалист</th>
           <th>Фамилия</th>
           <th>Имя</th>
           <th>Отчество</th>

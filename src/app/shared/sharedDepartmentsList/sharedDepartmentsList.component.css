@@ -6,3 +6,8 @@
 tr{
     cursor: pointer;
 }
+.filter-conteiner{
+    max-width: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}

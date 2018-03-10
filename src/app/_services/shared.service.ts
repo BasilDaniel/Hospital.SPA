@@ -198,6 +198,23 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
         .catch(this.handleError);
     }
 
+    departmentRegister(model: any) {
+        return this.authHttp.post(this.getBaseUrl() + 'createDepartment', model, this.requestOptions()).catch(this.handleError);
+    }
+
+    positionRegister(model: any) {
+        return this.authHttp.post(this.getBaseUrl() + 'createPosition', model, this.requestOptions()).catch(this.handleError);
+    }
+
+    diseaseRegister(model: any) {
+        return this.authHttp.post(this.getBaseUrl() + 'createDisease', model, this.requestOptions()).catch(this.handleError);
+    }
+
+
+    private requestOptions() {
+        const headers = new Headers({ 'Content-type': 'application/json' });
+        return new RequestOptions({ headers: headers });
+    }
 
     private handleError(error: any){
         const applicationError = error.headers.get('Application-error');
