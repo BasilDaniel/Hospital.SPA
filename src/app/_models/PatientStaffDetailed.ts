@@ -8,7 +8,7 @@ export interface PatientStaffDetailed {
     familyName: string;
     name: string;
     middleName: string;
-    appointmentDuration: Time;
+    appointmentDuration: number;
     position?: SharedPositionsList;
     department?: SharedDepartmentsList;
     appointments?: PatientStaffAppointmentsDetailed[];

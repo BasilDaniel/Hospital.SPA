@@ -5,7 +5,7 @@ export interface SharedAppointmentDetailed {
     id: number;
     dateTime: any;
     note: string;
-    duration: any;
+    duration: number;
     staff: SharedStaffsList;
     patient: SharedPatientsList;
 }

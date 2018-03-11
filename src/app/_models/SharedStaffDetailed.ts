@@ -9,7 +9,7 @@ export interface SharedStaffDetailed {
     name: string;
     middleName: string;
     birthdate: Date;
-    appointmentDuration: any;
+    appointmentDuration: number;
     position?: SharedPositionDetailed;
     department?: SharedDepartmentDetailed;
     appointments?: SharedAppointmentsList[];

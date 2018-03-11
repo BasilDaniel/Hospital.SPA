@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ruLocale } from 'ngx-bootstrap/locale';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-patientDiseaseRegister',
@@ -24,7 +25,8 @@ export class PatientDiseaseRegisterComponent implements OnInit {
     private sharedService: SharedService, 
     private alertify: AlertifyService, 
     private router: Router, 
-    private _localeService: BsLocaleService) { }
+    private _localeService: BsLocaleService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     defineLocale('ru', ruLocale);
@@ -53,14 +55,14 @@ export class PatientDiseaseRegisterComponent implements OnInit {
       }
     }
     let patientDiseaseModel = new PatientDiseaseModel(this.diagnosed, this.cured, this.note, this.patientId, this.diseaseId);
-    // this.registerForm.value.diseaseId = this.sharedService.idForPatientDiseaseRegister;
+    let path = '/' + this.authService.userLoggedIn + '/patient';
         
     this.sharedService.patientDiseaseRegister(patientDiseaseModel).subscribe(() => {
     this.alertify.success('Заболевание зарегистрировано');
     }, error => {
       this.alertify.error('Ошибка, попробуйте в другое время');
     }, () => {
-      this.router.navigate(['/admin/patient', this.patientId]);             
+      this.router.navigate([path, this.patientId]);             
     });   
   }
 

@@ -20,27 +20,27 @@ export class AppointmentService {
     appointmentDurations = [
         {
           "placeholder": "5 минут",
-          "data": "00:05:00"
+          "data": "05"
         }, 
         {
           "placeholder": "10 минут",
-          "data": "00:10:00"
+          "data": "10"
         },
         {
           "placeholder": "15 минут",
-          "data": "00:15:00"
+          "data": "15"
         },
          {
           "placeholder": "20 минут",
-          "data": "00:20:00"
+          "data": "20"
         },
         {
           "placeholder": "25 минут",
-          "data": "00:25:00"
+          "data": "25"
         }, 
         {
           "placeholder": "30 минут",
-          "data": "00:30:00"
+          "data": "30"
         }
       ];
 

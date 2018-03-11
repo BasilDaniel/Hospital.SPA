@@ -69,12 +69,12 @@ export class PatientAppointmentsListComponent implements OnInit {
       workingHourEnd: number = 18, 
       workingHourBreakStart: number = 12,
       workingHourBreakEnd: number = 13, 
-      appointmentDuration: number = 20
+      appointmentDuration: any = this.patientStaffDetailed.appointmentDuration
     ){
       let timeCounter = this.dateTime;
       timeCounter.setHours(workingHourStart, 0, 0);
       let dayModel = [];
-      let dayModelToReturn = [];
+      let dayModelToReturn = [];      
 
       class DayAppointment {
         day: any;

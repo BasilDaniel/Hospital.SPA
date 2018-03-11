@@ -75,7 +75,10 @@ export const appRoutes: Routes = [
             { path: 'staff/appointment/:id', component: SharedAppointmentDetailedComponent, resolve:{users: SharedAppointmentDetailedResolver}},
             { path: 'staff/disease/:id', component: SharedDiseaseDetailedComponent, resolve:{users: SharedDiseaseDetailedResolver}},
             { path: 'staff/diseases', component: SharedDiseasesListComponent, resolve:{users: SharedDiseasesListResolver}},
-            { path: 'staff/patientDiseaseRegister', component: PatientDiseaseRegisterComponent}            
+            { path: 'staff/patientDiseaseRegister', component: PatientDiseaseRegisterComponent},
+            { path: 'staff/patientDiseaseRegister', component: PatientDiseaseRegisterComponent, children: [
+                { path: 'diseases', component: SharedDiseasesListComponent, outlet: 'diseases', resolve:{users: SharedDiseasesListResolver}}
+            ]}         
         ]
     },
     //Admin routes

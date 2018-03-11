@@ -36,10 +36,15 @@ export class SharedDiseasesListComponent implements OnInit {
   }
 
   activateNewDiseaseButton(){
-    if(this.route.snapshot.routeConfig.path == 'diseases')
+    if(this.authService.userLoggedIn == 'admin'){
+      if(this.route.snapshot.routeConfig.path == 'diseases')
       return false;
 
       return true;
+    }
+
+    return false;
+    
   }
 
   clickToItem(id, name){

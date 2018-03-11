@@ -2,7 +2,7 @@
     <div class="row">
       <form class="form-inline" #form="ngForm">
         <button type="button" class="btn btn-info" style="margin-left:10px" (click)="patientDiseaseRegister()">Внести новое заболевание</button>
-        <button type="button" class="btn btn-info" style="margin-left:10px" (click)="appointmentRegister()">Записать на прием</button>
+        <!-- <button type="button" class="btn btn-info" style="margin-left:10px" (click)="appointmentRegister()">Записать на прием</button> -->
       </form>
     </div>
     <br>  
@@ -18,7 +18,7 @@
       </tr>
   </thead>
   <tbody>
-      <tr class="table-tr">
+      <tr>
           <td>{{sharedPatientDetailed.familyName}}</td>
           <td>{{sharedPatientDetailed.name}}</td>
           <td>{{sharedPatientDetailed.middleName}}</td>
@@ -36,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of sharedPatientDetailed.patientDiseases" class="table-tr">
+        <tr *ngFor="let item of sharedPatientDetailed.patientDiseases">
             <td>{{item.disease.name}}</td>
             <td>{{item.diagnosed | date:'dd.MM.yy'}}</td>
             <td>{{item.cured | date:'dd.MM.yy'}}</td>
