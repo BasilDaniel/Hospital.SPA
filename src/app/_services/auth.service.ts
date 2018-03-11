@@ -5,12 +5,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { tokenNotExpired, JwtHelper, AuthHttp } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-    staffAuthUrl = 'http://localhost:5000/api/AuthStaff/';
-    patientAuthUrl = 'http://localhost:5000/api/AuthPatient/';
-    adminAuthUrl = 'http://localhost:5000/api/AuthAdmin/';
+    staffAuthUrl = environment.staffAuthUrl;
+    patientAuthUrl = environment.patientAuthUrl;
+    adminAuthUrl = environment.adminAuthUrl;
     Token: any;
     userForLogin: string;
     userLoggedIn: string = 'nobody';
@@ -48,7 +49,7 @@ constructor(private http: Http, private authHttp: AuthHttp) { }
                     this.userLoggedIn = user;
                     this.userForLogin = 'nobody';
                     this.userId = this.decodedToken.nameid;
-                    console.log(this.userId);
+                    // console.log(this.userId);
                 }
             }).catch(this.handleError);
         }

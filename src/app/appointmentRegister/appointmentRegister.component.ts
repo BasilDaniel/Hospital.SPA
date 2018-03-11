@@ -23,7 +23,7 @@ export class AppointmentRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.appointmentToCreateData = this.appointmentService.appointmentToCreateData;
-    console.log(this.appointmentToCreateData);
+    // console.log(this.appointmentToCreateData);
   }
 
   appointmentRegister() {
@@ -44,7 +44,7 @@ export class AppointmentRegisterComponent implements OnInit {
       this.appointmentToCreateData.staffId,
       this.appointmentToCreateData.patientId
     )
-    console.log(appointmentModel);
+    // console.log(appointmentModel);
 
     this.appointmentService.register(appointmentModel).subscribe(() => {
     this.alertify.success('Номерок зарегистрирован');

@@ -22,7 +22,7 @@ export class StaffService {
     }
 
     getPatientId(id): Observable<PatientDetailed>{
-        console.log('staff2');
+        // console.log('staff2');
         return this.authHttp.get(this.baseUrl + 'patient/' + id)
         .map(response => <PatientDetailed>response.json())
         .catch(this.handleError);

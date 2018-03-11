@@ -68,8 +68,8 @@ export class StaffRegisterComponent implements OnInit {
     if (this.registerForm.valid){
       const urlPart: string = this.authService.userLoggedIn + '/staff';
       this.staffModel = Object.assign({}, this.registerForm.value);
-      console.log(this.registerForm.value);
-      console.log(this.staffModel);
+      // console.log(this.registerForm.value);
+      // console.log(this.staffModel);
       this.authService.register(this.staffModel, urlPart).subscribe(() => {
         this.alertify.success('Новый сотрудник зарегистрирован');
       }, error => {

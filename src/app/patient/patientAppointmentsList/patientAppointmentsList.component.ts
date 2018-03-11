@@ -161,7 +161,7 @@ export class PatientAppointmentsListComponent implements OnInit {
 
         dayModelToReturn.push(appointment);
       }
-    console.log(dayModelToReturn);
+    // console.log(dayModelToReturn);
       
     return dayModelToReturn;
   }
@@ -209,10 +209,10 @@ export class PatientAppointmentsListComponent implements OnInit {
         this.authService.userId,);
 
       this.router.navigate(['/patient/appointmentRegister']);
-      console.log(this.appointmentService.appointmentToCreateData.dateTime)
+      // console.log(this.appointmentService.appointmentToCreateData.dateTime)
     }
     else{
-      console.log('appointment NOT created')
+      // console.log('appointment NOT created')
     }
     // let appointmentToCreateData = new AppointmentToCreateData();
     // console.log('appointment created ' + dateTime)

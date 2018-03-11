@@ -62,7 +62,7 @@ export class AdminRegisterComponent implements OnInit {
 
   AdminRegister() {
     if (this.registerForm.valid){
-      console.log(this.registerForm.value);
+      // console.log(this.registerForm.value);
       const urlPart: string = this.authService.userLoggedIn + '/admin';
       this.adminModel = Object.assign({}, this.registerForm.value);
       this.authService.register(this.adminModel, urlPart).subscribe(() => {

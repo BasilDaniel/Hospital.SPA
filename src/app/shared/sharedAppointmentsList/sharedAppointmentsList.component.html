@@ -4,7 +4,7 @@
     <form class="form-inline" #form="ngForm"novalidate>
       <div class="form-group">
         <input type="text" placeholder="Выберите дату" class="form-control" #dp="bsDatepicker" 
-              bsDatepicker [(bsValue)]="dateTime" (bsValueChange)="getAppointmentsWithParams($event)"
+              bsDatepicker [(bsValue)]="dateTime" (bsValueChange)="getAppointmentsWithParams()"
               [bsConfig]="bsConfig">
         <!-- <input type="date" class="form-control" style="width: 270px" id="name" name="name" (change)="loadAppointments()" [(ngModel)]="userParams.dateTime"> -->
       </div>

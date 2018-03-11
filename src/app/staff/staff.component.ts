@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-staff',
@@ -17,7 +18,7 @@ export class StaffComponent implements OnInit {
   }
 
   getStaffs(){
-    this.http.get('http://localhost:5000/api/Staff').subscribe(response => {
+    this.http.get(environment.apiStaffUrl).subscribe(response => {
       this.Staffs = response.json();
     })
   }

@@ -7,5 +7,8 @@ export const environment = {
   production: false,
   apiPatientUrl: 'http://localhost:5000/api/Patient/',
   apiStaffUrl: 'http://localhost:5000/api/Staff/',
-  apiAdminUrl: 'http://localhost:5000/api/Admin/'
+  apiAdminUrl: 'http://localhost:5000/api/Admin/',
+  staffAuthUrl: 'http://localhost:5000/api/AuthStaff/',
+  patientAuthUrl: 'http://localhost:5000/api/AuthPatient/',
+  adminAuthUrl: 'http://localhost:5000/api/AuthAdmin/',
 };

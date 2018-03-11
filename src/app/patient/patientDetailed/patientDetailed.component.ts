@@ -24,7 +24,7 @@ export class PatientDetailedComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.patientDetailed = data['user'];
       
-      console.log(this.patientDetailed.appointments);
+      // console.log(this.patientDetailed.appointments);
       }, error => {
         this.alertify.error(error);
       });

@@ -31,7 +31,7 @@ export class AdminsListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.adminsList = data['users'];
-      console.log(this.adminsList);
+      // console.log(this.adminsList);
       });    
   }
 
