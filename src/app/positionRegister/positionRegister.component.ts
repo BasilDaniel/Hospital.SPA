@@ -34,7 +34,7 @@ export class PositionRegisterComponent implements OnInit {
     if (this.registerForm.valid){
       this.positionModel = Object.assign({}, this.registerForm.value);
       this.sharedService.positionRegister(this.positionModel).subscribe(() => {
-      this.alertify.success('Должность зарегистрировано');
+      this.alertify.success('Должность зарегистрирована');
       }, error => {
         this.alertify.error('Ошибка, попробуйте в другое время');
       }, () => {

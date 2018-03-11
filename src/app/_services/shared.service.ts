@@ -18,11 +18,31 @@ import { SharedAppointmentDetailed } from '../_models/SharedAppointmentDetailed'
 import { SharedDepartmentDetailed } from '../_models/SharedDepartmentDetailed';
 import { SharedPositionDetailed } from '../_models/SharedPositionDetailed';
 import { SharedDiseaseDetailed } from '../_models/SharedDiseaseDetailed';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class SharedService {
+    private patientId = new BehaviorSubject<number>(null);
+    patientIdObservable = this.patientId.asObservable();
+    private diseaseId = new BehaviorSubject<number>(null);
+    diseaseIdObservable = this.diseaseId.asObservable();
+    private diseaseName = new BehaviorSubject<string>('');
+    diseaseNameObservable = this.diseaseName.asObservable();
 
 constructor(private authHttp: AuthHttp, private authService: AuthService) { }
+
+    setPatientId(patientId: number){
+        this.patientId.next(patientId);
+    }
+
+    setDiseaseId(diseaseId: number){
+        this.diseaseId.next(diseaseId);
+    }
+
+    setDiseaseName(diseaseName: string){
+        this.diseaseName.next(diseaseName);
+    }
+
     getBaseUrl() {//have to be changed to more scalable unit
         if (this.authService.userLoggedIn === 'patient')
             return environment.apiPatientUrl;
@@ -208,6 +228,10 @@ constructor(private authHttp: AuthHttp, private authService: AuthService) { }
 
     diseaseRegister(model: any) {
         return this.authHttp.post(this.getBaseUrl() + 'createDisease', model, this.requestOptions()).catch(this.handleError);
+    }
+
+    patientDiseaseRegister(model: any) {
+        return this.authHttp.post(this.getBaseUrl() + 'createPatientDisease', model, this.requestOptions()).catch(this.handleError);
     }
 
 

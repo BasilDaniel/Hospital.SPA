@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <router-outlet name="diseases"></router-outlet>
+    </div>
+    <div class="col-md-6">
+        <form #loginForm="ngForm">
+            <h2 class="text-center text-primary">Введите данные</h2>
+          
+            <hr>
+
+            <div class="col-md-6 col-md-offset-3">
+              
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Название заболевания" name="diseaseName" [(ngModel)]="diseaseName">
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Поставлен диагноз" bsDatepicker [bsConfig]="bsConfig" bsDatepicker [(bsValue)]="diagnosed">
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Выздоровление" bsDatepicker [bsConfig]="bsConfig" bsDatepicker [(bsValue)]="cured">
+                </div>
+
+                <div class="form-group">
+                  <textarea  class="form-control" placeholder="Комментарий" name="note" [(ngModel)]="note"></textarea>
+                </div>
+
+                <div class="form-group text-center">
+                  <button class="btn btn-success" (click)="patientDiseaseRegister()">Добавить заболевание</button>
+                  <!-- <button class="btn btn-default" type="button" (click)="cancel()">Отмена</button> -->
+                </div>
+
+
+            </div>
+          </form>
+
+      <!-- <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+            <form [formGroup]="registerForm" (ngSubmit)="patientDiseaseRegister()">
+                <h2 class="text-center text-primary">Введите данные заболевания</h2>
+              
+                <hr>
+            
+                <div class="form-group" [ngClass]="{'has-error': registerForm.get('name').errors && registerForm.get('name').touched}">
+                  <input type="text" class="form-control" placeholder="Название заболевания" formControlName="name">
+                  <span class="help-block" *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched">
+                    Введите название заболевания
+                  </span>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': registerForm.get('birthdate').errors && registerForm.get('birthdate').touched}">
+                  <input type="text" class="form-control" placeholder="Дата рождения" bsDatepicker [bsConfig]="bsConfig" formControlName="birthdate">
+                  <span class="help-block" *ngIf="registerForm.get('birthdate').hasError('required') && registerForm.get('birthdate').touched">
+                    Введите дату рождения
+                  </span>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': registerForm.get('birthdate').errors && registerForm.get('birthdate').touched}">
+                  <input type="text" class="form-control" placeholder="Дата рождения" bsDatepicker [bsConfig]="bsConfig" formControlName="birthdate">
+                  <span class="help-block" *ngIf="registerForm.get('birthdate').hasError('required') && registerForm.get('birthdate').touched">
+                    Введите дату рождения
+                  </span>
+                </div>
+              
+                <div class="form-group" [ngClass]="{'has-error': registerForm.get('description').errors && registerForm.get('description').touched}">
+                  <textarea  class="form-control" placeholder="Описание заболевания" formControlName="description"></textarea>
+                  <span class="help-block" *ngIf="registerForm.get('description').hasError('required') && registerForm.get('description').touched">
+                    Введите описание заболевания
+                  </span>
+                </div>        
+            
+              
+                <div class="form-group text-center">
+                  <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Добавить заболевание</button>
+                  <button class="btn btn-default" type="button" [routerLink]="['/admin/diseases']">Отмена</button>
+                </div>
+              </form>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 <div class="container filter-conteiner">
       <div class="row">
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadDiseases()" novalidate>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'elem-width': !activateNewDiseaseButton()}">
           <input type="string" class="form-control" style="width: 270px" id="name" placeholder="Название заболевания" name="name" (keyup)="loadDiseases()" [(ngModel)]="userParams.name">
-          <button type="button" class="btn btn-info" style="margin-left:10px" (click)="diseaseRegister()">Новое заболевание</button>
+          <button *ngIf="activateNewDiseaseButton()" type="button" class="btn btn-info" style="margin-left:10px" (click)="diseaseRegister()">Новое заболевание</button>
         </div>  
       </form>
     </div>
@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of sharedDiseasesList" (click)="linkToUser(item.id)">
+        <tr *ngFor="let item of sharedDiseasesList" (click)="clickToItem(item.id, item.name)">
             <td>{{item.name}}</td>
         </tr>        
     </tbody>

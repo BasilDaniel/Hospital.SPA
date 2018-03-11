@@ -62,6 +62,7 @@ import { AppointmentRegisterComponent } from './appointmentRegister/appointmentR
 import { DepartmentRegisterComponent } from './departmentRegister/departmentRegister.component';
 import { PositionRegisterComponent } from './positionRegister/positionRegister.component';
 import { DiseaseRegisterComponent } from './diseaseRegister/diseaseRegister.component';
+import { PatientDiseaseRegisterComponent } from './patientDiseaseRegister/patientDiseaseRegister.component';
 
 
 @NgModule({
@@ -96,11 +97,11 @@ import { DiseaseRegisterComponent } from './diseaseRegister/diseaseRegister.comp
     AppointmentRegisterComponent,
     DepartmentRegisterComponent,
     PositionRegisterComponent,
-    DiseaseRegisterComponent
-,
+    DiseaseRegisterComponent,
     DepartmentRegisterComponent,
     PositionRegisterComponent,
-    DiseaseRegisterComponent
+    DiseaseRegisterComponent,
+    PatientDiseaseRegisterComponent
 ],
   imports: [
     BrowserModule,

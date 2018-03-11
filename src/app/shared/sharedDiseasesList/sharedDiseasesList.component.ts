@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SharedDiseasesList } from '../../_models/SharedDiseasesList';
 import { Pagination, PaginatedResult } from '../../_models/pagination';
 import { AuthService } from '../../_services/auth.service';
@@ -15,13 +15,14 @@ export class SharedDiseasesListComponent implements OnInit {
   sharedDiseasesList: SharedDiseasesList[];
   pagination: Pagination;
   userParams: any = {};
+  @Output() idTransmit = new EventEmitter();
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private sharedService: SharedService,
     private alertify: AlertifyService, 
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -34,10 +35,26 @@ export class SharedDiseasesListComponent implements OnInit {
       this.userParams.name = '';
   }
 
-  linkToUser(id){
-    let path = '/' + this.authService.userLoggedIn + '/disease';
-    this.router.navigate([path, id]);
+  activateNewDiseaseButton(){
+    if(this.route.snapshot.routeConfig.path == 'diseases')
+      return false;
+
+      return true;
   }
+
+  clickToItem(id, name){
+    if(this.route.snapshot.routeConfig.path == 'diseases'){
+      this.sharedService.setDiseaseId(id);
+      this.sharedService.setDiseaseName(name);
+    }
+    else{
+      let path = '/' + this.authService.userLoggedIn + '/disease';
+    this.router.navigate([path, id]);
+    }
+    
+  }
+
+  
 
   loadDiseases() {
     this.sharedService.getDiseasesList(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
